@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PandaGizmo BD | Online Gadget Store</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f0f9ff;color:#102a43}
+header{background:#fff;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px #0001}
+.logo{font-size:24px;font-weight:bold;color:#0284c7}
+.cart{background:#0284c7;color:white;border:0;border-radius:8px;padding:10px 14px}
+.hero{margin:20px auto;background:linear-gradient(135deg,#0284c7,#0f172a);color:white;padding:35px 22px;border-radius:18px;max-width:1100px}
+.hero h1{font-size:32px;margin:0 0 12px}
+.hero p{line-height:1.6}
+.search{display:block;width:90%;max-width:600px;margin:20px auto;padding:14px;border:1px solid #bae6fd;border-radius:10px;font-size:16px}
+h2{text-align:center}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:15px;max-width:1100px;margin:auto}
+.card{background:white;border-radius:14px;padding:12px;box-shadow:0 3px 12px #0000000d}
+.pic{height:115px;background:#e0f2fe;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:48px}
+.card h3{font-size:16px}
+.price{font-weight:bold;color:#0284c7}
+.card button{width:100%;padding:10px;margin-top:7px;border:0;border-radius:8px;background:#0284c7;color:white;font-size:14px}
+footer{text-align:center;background:#0f172a;color:white;padding:25px 12px;margin-top:25px}
+@media(min-width:650px){.products{grid-template-columns:repeat(4,minmax(0,1fr))}.pic{height:160px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🐼 PandaGizmo BD</div>
+<button class="cart" onclick="showCart()">🛒 Cart (<span id="count">0</span>)</button>
+</header>
+
+<section class="hero">
+<h1>আপনার পছন্দের গ্যাজেট এখন এক জায়গায়!</h1>
+<p>স্মার্ট গ্যাজেট, মোবাইল অ্যাক্সেসরিজ ও দৈনন্দিন প্রযুক্তিপণ্য অর্ডার করুন সহজেই।</p>
+<strong>Welcome to PandaGizmo BD</strong>
+</section>
+
+<input id="search" class="search" placeholder="🔍 গ্যাজেট খুঁজুন..." oninput="renderProducts()">
+
+<h2>🔥 আমাদের গ্যাজেট কালেকশন</h2>
+<div id="products" class="products"></div>
+
+<footer>
+<h3>🐼 PandaGizmo BD</h3>
+<p>আপনার বিশ্বস্ত অনলাইন গ্যাজেট শপ</p>
+<p>📍 Location: PandaGizmo Online only</p>
+<p>📲 WhatsApp: 01331199256</p>
+<button class="cart" onclick="orderWhatsApp()">WhatsApp-এ অর্ডার করুন</button>
+</footer>
+
+<script>
+const items=[
+{id:1,name:"VEN-DENS 30000mAh Power Bank",price:2100,icon:"🔋"},
+{id:2,name:"HOCO M105 Sharp Earphone",price:950,icon:"🎧"},
+{id:3,name:"Rechargeable LED Light",price:549,icon:"💡"},
+{id:4,name:"Mobile Phone Cooler",price:1250,icon:"❄️"},
+{id:5,name:"M-88 LED Video Light",price:899,icon:"💡"},
+{id:6,name:"Mini UPS",price:1350,icon:"🔌"},
+{id:7,name:"Digital LED Clock",price:650,icon:"⏰"},
+{id:8,name:"Wireless Gadget",price:750,icon:"📱"}
+];
+let cart=[];
+function renderProducts(){
+const q=document.getElementById("search").value.toLowerCase();
+document.getElementById("products").innerHTML=items.filter(p=>p.name.toLowerCase().includes(q)).map(p=>`
+<div class="card"><div class="pic">${p.icon}</div><h3>${p.name}</h3>
+<div class="price">৳${p.price}</div>
+<button onclick="addCart(${p.id})">কার্টে যোগ করুন</button></div>`).join("");
+}
+function addCart(id){cart.push(items.find(p=>p.id===id));document.getElementById("count").textContent=cart.length;alert("পণ্যটি কার্টে যোগ হয়েছে!")}
+function showCart(){if(!cart.length){alert("আপনার কার্ট খালি।");return}alert(cart.map(p=>p.name+" — ৳"+p.price).join("\n")+"\n\nমোট: ৳"+cart.reduce((s,p)=>s+p.price,0))}
+function orderWhatsApp(){
+if(!cart.length){window.open("https://wa.me/8801331199256?text="+encodeURIComponent("আসসালামু আলাইকুম, PandaGizmo BD থেকে পণ্য অর্ডার করতে চাই।"),"_blank");return}
+let total=cart.reduce((s,p)=>s+p.price,0);
+let msg="আসসালামু আলাইকুম, PandaGizmo BD-তে অর্ডার করতে চাই:\n"+cart.map(p=>p.name+" - ৳"+p.price).join("\n")+"\nমোট: ৳"+total+"\n\nনাম:\nঠিকানা:";
+window.open("https://wa.me/8801331199256?text="+encodeURIComponent(msg),"_blank");
+}
+renderProducts();
+</script>
+</body>
+</html>
