@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PandaGizmo BD | Admin Panel</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f0f9ff;color:#172554}
+header{background:#0284c7;color:white;padding:20px;text-align:center}
+main{max-width:650px;margin:25px auto;padding:15px}
+.card{background:white;padding:20px;border-radius:16px;margin-bottom:18px;box-shadow:0 4px 15px #0001}
+h2{margin-top:0;color:#0369a1}
+input,select,button{width:100%;padding:13px;margin:8px 0;border-radius:9px;font-size:16px}
+input,select{border:1px solid #cbd5e1}
+button{background:#0284c7;color:white;border:0;font-weight:bold}
+.note{font-size:14px;line-height:1.6;color:#475569}
+</style>
+</head>
+<body>
+<header>
+<h1>🐼 PandaGizmo BD</h1>
+<p>Admin Panel</p>
+</header>
+<main>
+<section class="card">
+<h2>🔐 অ্যাডমিন লগইন</h2>
+<p class="note">এই পেজটি শুধু অ্যাডমিন ব্যবহারের জন্য। নিরাপদ লগইনের জন্য সার্ভার সেটআপ প্রয়োজন।</p>
+<label>অ্যাডমিন পাসওয়ার্ড</label>
+<input type="password" id="password" placeholder="পাসওয়ার্ড লিখুন">
+<button onclick="login()">লগইন</button>
+<p id="message" class="note"></p>
+</section>
+
+<section class="card" id="dashboard" hidden>
+<h2>📦 অর্ডার ম্যানেজমেন্ট</h2>
+<p class="note">অর্ডার দেখার সুবিধা চালু করতে Cloudflare Worker ও Database সংযোগ করতে হবে।</p>
+<button onclick="alert('পরবর্তী ধাপে Database সংযোগ করব।')">অর্ডার দেখুন</button>
+</section>
+</main>
+<script>
+function login(){
+document.getElementById('message').textContent=
+'নিরাপদ সার্ভার লগইন এখনো সংযুক্ত হয়নি। পরবর্তী ধাপে সেটআপ করতে হবে।';
+}
+</script>
+</body>
+</html>
