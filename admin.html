@@ -3,22 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PandaGizmo BD Admin Panel</title>
+<title>PandaGizmo BD — Admin Panel</title>
 
 <style>
+:root {
+  --primary: #0878e8;
+  --primary-dark: #0759b5;
+  --bg: #f2f7fd;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #64748b;
+  --border: #dbe5f0;
+  --success: #16834a;
+  --danger: #d62828;
+  --warning: #b77900;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f0f9ff;
-  color: #1e293b;
+  font-family: Arial, "Noto Sans Bengali", sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
 header {
-  background: linear-gradient(120deg, #0284c7, #38bdf8);
+  background: linear-gradient(120deg, #0878e8, #064da8);
   color: white;
   padding: 24px 16px;
   text-align: center;
@@ -26,132 +39,229 @@ header {
 
 header h1 {
   margin: 0;
+  font-size: 29px;
 }
 
-main {
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px 14px;
+header p {
+  margin: 8px 0 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 15px 40px;
 }
 
 .card {
-  background: white;
-  border: 1px solid #dbeafe;
-  border-radius: 14px;
-  padding: 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 20px;
   margin-bottom: 18px;
-  box-shadow: 0 4px 15px #0f172a0a;
+  box-shadow: 0 4px 18px #12345a0c;
 }
 
 h2 {
-  color: #0f172a;
   margin-top: 0;
-}
-
-label {
-  display: block;
-  margin: 12px 0 6px;
-  font-weight: bold;
-}
-
-input, textarea, select {
-  width: 100%;
-  padding: 11px;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  font-size: 15px;
-}
-
-textarea {
-  min-height: 85px;
-}
-
-button {
-  background: #0284c7;
-  color: white;
-  border: 0;
-  border-radius: 8px;
-  padding: 11px 15px;
-  margin-top: 12px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-.secondary {
-  background: #e0f2fe;
-  color: #075985;
-}
-
-.danger {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-.notice {
-  background: #f1f5f9;
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 12px;
-  overflow-wrap: anywhere;
+  font-size: 21px;
 }
 
 .hidden {
   display: none !important;
 }
 
-.row {
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 12px 0 6px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  padding: 10px 15px;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+button.secondary {
+  background: #64748b;
+}
+
+button.danger {
+  background: var(--danger);
+}
+
+button.success {
+  background: var(--success);
+}
+
+button.small {
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+.grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.stat {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 27px;
+  margin-top: 8px;
 }
 
 .tabs {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 650px;
+.tabs button {
+  background: #dcecff;
+  color: #0759a8;
 }
 
-th, td {
-  text-align: left;
-  padding: 10px;
-  border-bottom: 1px solid #e2e8f0;
+.tabs button.active {
+  background: var(--primary);
+  color: white;
 }
 
-th {
-  background: #e0f2fe;
+.message {
+  padding: 12px;
+  border-radius: 8px;
+  background: #eaf3ff;
+  color: #0759a8;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.message.error {
+  background: #fff0f0;
+  color: #a51d1d;
+}
+
+.message.success {
+  background: #e9f9ef;
+  color: #126637;
 }
 
 .table-wrap {
   overflow-x: auto;
 }
 
-.product {
-  border: 1px solid #dbeafe;
-  padding: 12px;
-  border-radius: 10px;
-  margin: 10px 0;
-  overflow-wrap: anywhere;
-}
-
-.product img {
+table {
+  border-collapse: collapse;
   width: 100%;
-  max-height: 180px;
-  object-fit: contain;
+  min-width: 760px;
 }
 
-@media (max-width: 600px) {
-  .row {
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  font-size: 14px;
+}
+
+th {
+  background: #edf5ff;
+}
+
+.product-image {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #edf2f7;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 650px) {
+  .grid,
+  .stats {
     grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  header h1 {
+    font-size: 24px;
   }
 }
 </style>
@@ -164,417 +274,1038 @@ th {
   <p>Admin Panel — পণ্য ও অর্ডার ব্যবস্থাপনা</p>
 </header>
 
-<main>
+<div class="container">
 
-<section class="card" id="loginCard">
-  <h2>🔐 অ্যাডমিন লগইন</h2>
+  <!-- LOGIN -->
+  <section class="card" id="loginCard">
+    <h2>🔐 অ্যাডমিন লগইন</h2>
 
-  <p>
-    আপনার Cloudflare Worker-এর ADMIN_TOKEN লিখুন।
-    এটি কারও সঙ্গে শেয়ার করবেন না।
-  </p>
-
-  <label for="token">ADMIN_TOKEN</label>
-  <input
-    type="password"
-    id="token"
-    placeholder="অ্যাডমিন টোকেন লিখুন"
-    autocomplete="current-password"
-  >
-
-  <button id="loginBtn" onclick="login()">
-    লগইন করুন
-  </button>
-
-  <p id="loginMsg" class="notice"></p>
-</section>
-
-<section id="dashboard" class="hidden">
-
-  <section class="card">
-    <h2>📊 অ্যাডমিন ড্যাশবোর্ড</h2>
-    <button class="danger" onclick="logout()">লগআউট</button>
-
-    <div class="tabs">
-      <button onclick="showTab('productsTab')">
-        📦 পণ্য
-      </button>
-
-      <button onclick="showTab('ordersTab')">
-        🛒 অর্ডার
-      </button>
-    </div>
-
-    <p id="globalMsg" class="notice">
-      অ্যাডমিন প্যানেলে স্বাগতম।
+    <p>
+      আপনার Cloudflare Worker-এর ADMIN_TOKEN লিখুন।
+      এই টোকেন কারও সঙ্গে শেয়ার করবেন না।
     </p>
-  </section>
 
-  <section class="card" id="productsTab">
-    <h2>📦 পণ্য যোগ করুন / পরিবর্তন করুন</h2>
+    <form id="loginForm">
+      <label for="token">ADMIN_TOKEN</label>
 
-    <form id="productForm" onsubmit="saveProduct(event)">
-      <input type="hidden" id="productId">
-
-      <div class="row">
-        <div>
-          <label for="name">পণ্যের নাম *</label>
-          <input id="name" required>
-        </div>
-
-        <div>
-          <label for="category">ক্যাটাগরি</label>
-          <input id="category" placeholder="যেমন: Earphones">
-        </div>
-
-        <div>
-          <label for="price">বিক্রয়মূল্য (৳) *</label>
-          <input id="price" type="number" min="0" required>
-        </div>
-
-        <div>
-          <label for="old_price">আগের মূল্য (৳)</label>
-          <input id="old_price" type="number" min="0">
-        </div>
-
-        <div>
-          <label for="stock">স্টকের পরিমাণ</label>
-          <input id="stock" type="number" min="0" value="1">
-        </div>
-
-        <div>
-          <label for="image_url">পণ্যের ছবির URL</label>
-          <input id="image_url" type="url" placeholder="https://...">
-        </div>
-      </div>
-
-      <label for="description">পণ্যের বিবরণ</label>
-      <textarea id="description"></textarea>
-
-      <button type="submit" id="saveBtn">
-        পণ্য সংরক্ষণ করুন
-      </button>
-
-      <button
-        type="button"
-        class="secondary"
-        onclick="clearForm()"
+      <input
+        type="password"
+        id="token"
+        placeholder="অ্যাডমিন টোকেন লিখুন"
+        autocomplete="current-password"
+        required
       >
-        ফর্ম পরিষ্কার
-      </button>
+
+      <div class="actions">
+        <button type="submit">লগইন করুন</button>
+      </div>
     </form>
 
-    <p id="productMsg" class="notice"></p>
-
-    <hr>
-
-    <h2>🧾 পণ্যের তালিকা</h2>
-    <button onclick="loadProducts()">পণ্য রিফ্রেশ করুন</button>
-    <div id="productList"></div>
+    <div id="loginMsg" class="message hidden"></div>
   </section>
 
-  <section class="card hidden" id="ordersTab">
-    <h2>🛒 অর্ডার ম্যানেজমেন্ট</h2>
 
-    <button onclick="loadOrders()">অর্ডার রিফ্রেশ করুন</button>
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="hidden">
 
-    <p id="ordersMsg" class="notice"></p>
+    <div class="card topline">
+      <div>
+        <h2 style="margin-bottom:5px">ড্যাশবোর্ড</h2>
+        <span class="muted">PandaGizmo Store Management</span>
+      </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>অর্ডার</th>
-            <th>ক্রেতা</th>
-            <th>ঠিকানা</th>
-            <th>মোট</th>
-            <th>স্ট্যাটাস</th>
-            <th>আপডেট</th>
-          </tr>
-        </thead>
-
-        <tbody id="ordersBody">
-          <tr>
-            <td colspan="6">অর্ডার লোড করুন।</td>
-          </tr>
-        </tbody>
-      </table>
+      <button id="logoutBtn" class="secondary">
+        লগআউট
+      </button>
     </div>
-  </section>
 
-</section>
-</main>
+
+    <!-- STATISTICS -->
+    <div class="stats">
+      <div class="stat">
+        <span>মোট পণ্য</span>
+        <strong id="productCount">—</strong>
+      </div>
+
+      <div class="stat">
+        <span>মোট স্টক</span>
+        <strong id="stockCount">—</strong>
+      </div>
+
+      <div class="stat">
+        <span>মোট অর্ডার</span>
+        <strong id="orderCount">—</strong>
+      </div>
+    </div>
+
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="active" data-tab="productsTab">
+        📦 পণ্যসমূহ
+      </button>
+
+      <button data-tab="formTab">
+        ➕ নতুন পণ্য
+      </button>
+
+      <button data-tab="ordersTab">
+        🛒 অর্ডারসমূহ
+      </button>
+    </div>
+
+
+    <!-- PRODUCTS -->
+    <section class="card tab-panel" id="productsTab">
+
+      <div class="topline">
+        <h2>📦 পণ্য ব্যবস্থাপনা</h2>
+
+        <button class="secondary" id="refreshProducts">
+          রিফ্রেশ
+        </button>
+      </div>
+
+      <label for="productSearch">পণ্য খুঁজুন</label>
+
+      <input
+        id="productSearch"
+        placeholder="পণ্যের নাম বা ক্যাটাগরি লিখুন"
+      >
+
+      <div id="productsMsg" class="message hidden"></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ছবি</th>
+              <th>পণ্য</th>
+              <th>দাম</th>
+              <th>স্টক</th>
+              <th>অ্যাকশন</th>
+            </tr>
+          </thead>
+
+          <tbody id="productsBody">
+            <tr>
+              <td colspan="5">পণ্য লোড হচ্ছে…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <!-- PRODUCT FORM -->
+    <section class="card tab-panel hidden" id="formTab">
+
+      <h2 id="formTitle">➕ নতুন পণ্য যোগ করুন</h2>
+
+      <form id="productForm">
+
+        <input type="hidden" id="productId">
+
+        <div class="grid">
+
+          <div>
+            <label for="name">পণ্যের নাম *</label>
+            <input id="name" maxlength="180" required>
+          </div>
+
+          <div>
+            <label for="category">ক্যাটাগরি</label>
+            <input
+              id="category"
+              placeholder="যেমন: Earphones"
+            >
+          </div>
+
+          <div>
+            <label for="price">বিক্রয়মূল্য (৳) *</label>
+            <input
+              id="price"
+              type="number"
+              min="0"
+              step="0.01"
+              required
+            >
+          </div>
+
+          <div>
+            <label for="oldPrice">আগের মূল্য (৳)</label>
+            <input
+              id="oldPrice"
+              type="number"
+              min="0"
+              step="0.01"
+            >
+          </div>
+
+          <div>
+            <label for="stock">স্টক সংখ্যা</label>
+            <input
+              id="stock"
+              type="number"
+              min="0"
+              step="1"
+              value="0"
+            >
+          </div>
+
+          <div>
+            <label for="imageUrl">ছবির URL</label>
+            <input
+              id="imageUrl"
+              type="url"
+              placeholder="https://..."
+            >
+          </div>
+
+          <div class="full">
+            <label for="description">পণ্যের বিস্তারিত</label>
+            <textarea
+              id="description"
+              placeholder="পণ্যের বিবরণ লিখুন"
+            ></textarea>
+          </div>
+
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="saveBtn">
+            পণ্য সংরক্ষণ করুন
+          </button>
+
+          <button
+            type="button"
+            id="clearBtn"
+            class="secondary"
+          >
+            ফর্ম পরিষ্কার
+          </button>
+        </div>
+
+      </form>
+
+      <div id="productMsg" class="message hidden"></div>
+    </section>
+
+
+    <!-- ORDERS -->
+    <section class="card tab-panel hidden" id="ordersTab">
+
+      <div class="topline">
+        <h2>🛒 অর্ডার ব্যবস্থাপনা</h2>
+
+        <button class="secondary" id="refreshOrders">
+          রিফ্রেশ
+        </button>
+      </div>
+
+      <label for="orderSearch">অর্ডার খুঁজুন</label>
+
+      <input
+        id="orderSearch"
+        placeholder="নাম, ফোন বা অর্ডার নম্বর"
+      >
+
+      <div id="ordersMsg" class="message hidden"></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>অর্ডার</th>
+              <th>ক্রেতা</th>
+              <th>ঠিকানা</th>
+              <th>মোট</th>
+              <th>স্ট্যাটাস</th>
+              <th>আপডেট</th>
+            </tr>
+          </thead>
+
+          <tbody id="ordersBody">
+            <tr>
+              <td colspan="6">অর্ডার লোড হচ্ছে…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </section>
+</div>
+
 
 <script>
-const API = "https://pandashop-bd-api-2026.pandagizmofficial.workers.dev";
-let adminToken = "";
+(() => {
+  "use strict";
 
-function msg(id, text) {
-  document.getElementById(id).textContent = text;
-}
+  /*
+    PandaGizmo Cloudflare Worker API
+    আপনার Worker URL পরিবর্তন করা হলে নিচের URL পরিবর্তন করতে হবে।
+  */
+  const API_BASE =
+    "https://pandashop-bd-api-2026.pandagizmofficial.workers.dev";
 
-async function request(path, options = {}) {
-  const response = await fetch(API + path, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + adminToken,
-      ...(options.headers || {})
+  const $ = id => document.getElementById(id);
+
+  let adminToken = "";
+  let allProducts = [];
+  let allOrders = [];
+
+
+  // -------------------------
+  // MESSAGE
+  // -------------------------
+
+  function message(id, text, type = "") {
+    const el = $(id);
+
+    if (!el) return;
+
+    el.textContent = text;
+    el.className = "message" + (type ? " " + type : "");
+    el.classList.remove("hidden");
+  }
+
+  function hideMessage(id) {
+    const el = $(id);
+
+    if (el) {
+      el.classList.add("hidden");
+    }
+  }
+
+
+  // -------------------------
+  // SAFE HTML
+  // -------------------------
+
+  function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+  function money(value) {
+    const number = Number(value);
+
+    return Number.isFinite(number)
+      ? "৳" + number.toLocaleString("en-BD")
+      : "—";
+  }
+
+  function normalizeList(data, key) {
+    if (Array.isArray(data)) return data;
+
+    if (data && Array.isArray(data[key])) {
+      return data[key];
+    }
+
+    if (data && Array.isArray(data.data)) {
+      return data.data;
+    }
+
+    return [];
+  }
+
+
+  // -------------------------
+  // API REQUEST
+  // -------------------------
+
+  async function request(path, options = {}) {
+    const headers = new Headers(options.headers || {});
+
+    headers.set("Authorization", "Bearer " + adminToken);
+
+    if (options.body !== undefined) {
+      headers.set("Content-Type", "application/json");
+    }
+
+    const response = await fetch(API_BASE + path, {
+      ...options,
+      headers
+    });
+
+    const text = await response.text();
+
+    let data = {};
+
+    try {
+      data = text ? JSON.parse(text) : {};
+    } catch {
+      data = {
+        message: text || "সার্ভারের উত্তর পড়া যায়নি"
+      };
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        data.error ||
+        data.message ||
+        ("HTTP " + response.status)
+      );
+    }
+
+    if (data && data.success === false) {
+      throw new Error(data.error || "অনুরোধ সফল হয়নি");
+    }
+
+    return data;
+  }
+
+
+  // -------------------------
+  // LOGIN / LOGOUT
+  // -------------------------
+
+  function showDashboard() {
+    $("loginCard").classList.add("hidden");
+    $("dashboard").classList.remove("hidden");
+  }
+
+  function logout() {
+    adminToken = "";
+
+    sessionStorage.removeItem("pandagizmo_admin_token");
+
+    $("token").value = "";
+
+    $("dashboard").classList.add("hidden");
+    $("loginCard").classList.remove("hidden");
+
+    message("loginMsg", "লগআউট হয়েছে।", "success");
+  }
+
+  $("loginForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    hideMessage("loginMsg");
+
+    adminToken = $("token").value.trim();
+
+    if (!adminToken) {
+      message("loginMsg", "ADMIN_TOKEN লিখুন।", "error");
+      return;
+    }
+
+    try {
+      // Admin token যাচাই করার জন্য admin-only endpoint
+      await request("/api/products?all=1");
+
+      sessionStorage.setItem(
+        "pandagizmo_admin_token",
+        adminToken
+      );
+
+      showDashboard();
+
+      await loadProducts();
+      await loadOrders();
+
+      message(
+        "productsMsg",
+        "লগইন সফল হয়েছে।",
+        "success"
+      );
+
+    } catch (error) {
+      adminToken = "";
+
+      message(
+        "loginMsg",
+        "লগইন হয়নি: " + error.message +
+        "\nADMIN_TOKEN ও Worker API URL যাচাই করুন।",
+        "error"
+      );
     }
   });
 
-  const text = await response.text();
-  let data;
+  $("logoutBtn").addEventListener("click", logout);
 
-  try {
-    data = JSON.parse(text);
-  } catch {
-    data = { error: text || "সার্ভার থেকে উত্তর পাওয়া যায়নি।" };
+
+  // -------------------------
+  // TAB NAVIGATION
+  // -------------------------
+
+  function openTab(tabId) {
+    document.querySelectorAll("[data-tab]").forEach(button => {
+      button.classList.toggle(
+        "active",
+        button.dataset.tab === tabId
+      );
+    });
+
+    document.querySelectorAll(".tab-panel").forEach(panel => {
+      panel.classList.toggle(
+        "hidden",
+        panel.id !== tabId
+      );
+    });
+
+    if (tabId === "productsTab") {
+      loadProducts();
+    }
+
+    if (tabId === "ordersTab") {
+      loadOrders();
+    }
   }
 
-  if (!response.ok) {
-    throw new Error(data.error || data.message || "Request failed");
+  document.querySelectorAll("[data-tab]").forEach(button => {
+    button.addEventListener("click", () => {
+      openTab(button.dataset.tab);
+    });
+  });
+
+
+  // -------------------------
+  // PRODUCT FORM
+  // -------------------------
+
+  function clearForm() {
+    $("productForm").reset();
+
+    $("productId").value = "";
+    $("stock").value = "0";
+
+    $("formTitle").textContent = "➕ নতুন পণ্য যোগ করুন";
+    $("saveBtn").textContent = "পণ্য সংরক্ষণ করুন";
+
+    hideMessage("productMsg");
   }
 
-  return data;
-}
+  $("clearBtn").addEventListener("click", clearForm);
 
-async function login() {
-  const token = document.getElementById("token").value.trim();
+  $("productForm").addEventListener("submit", async event => {
+    event.preventDefault();
 
-  if (!token) {
-    msg("loginMsg", "ADMIN_TOKEN লিখুন।");
-    return;
+    hideMessage("productMsg");
+
+    const id = $("productId").value;
+
+    const payload = {
+      name: $("name").value.trim(),
+      description: $("description").value.trim(),
+      price: Number($("price").value),
+
+      old_price: $("oldPrice").value === ""
+        ? null
+        : Number($("oldPrice").value),
+
+      image_url: $("imageUrl").value.trim(),
+      category: $("category").value.trim(),
+      stock: Number($("stock").value || 0)
+    };
+
+    if (!payload.name) {
+      message(
+        "productMsg",
+        "পণ্যের নাম লিখুন।",
+        "error"
+      );
+      return;
+    }
+
+    if (
+      !Number.isFinite(payload.price) ||
+      payload.price < 0
+    ) {
+      message(
+        "productMsg",
+        "সঠিক বিক্রয়মূল্য লিখুন।",
+        "error"
+      );
+      return;
+    }
+
+    if (
+      !Number.isFinite(payload.stock) ||
+      payload.stock < 0
+    ) {
+      message(
+        "productMsg",
+        "সঠিক স্টক সংখ্যা লিখুন।",
+        "error"
+      );
+      return;
+    }
+
+    const button = $("saveBtn");
+
+    button.disabled = true;
+    button.textContent = "সংরক্ষণ হচ্ছে…";
+
+    try {
+      await request(
+        id
+          ? "/api/products/" + encodeURIComponent(id)
+          : "/api/products",
+        {
+          method: id ? "PUT" : "POST",
+          body: JSON.stringify(payload)
+        }
+      );
+
+      message(
+        "productMsg",
+        id
+          ? "পণ্য আপডেট হয়েছে।"
+          : "নতুন পণ্য যোগ হয়েছে।",
+        "success"
+      );
+
+      clearForm();
+
+      await loadProducts();
+
+      openTab("productsTab");
+
+    } catch (error) {
+      message(
+        "productMsg",
+        "পণ্য সংরক্ষণ হয়নি: " + error.message,
+        "error"
+      );
+    } finally {
+      button.disabled = false;
+      button.textContent = "পণ্য সংরক্ষণ করুন";
+    }
+  });
+
+
+  // -------------------------
+  // LOAD PRODUCTS
+  // -------------------------
+
+  async function loadProducts() {
+    $("productsBody").innerHTML =
+      '<tr><td colspan="5">পণ্য লোড হচ্ছে…</td></tr>';
+
+    try {
+      const data = await request("/api/products?all=1");
+
+      allProducts = normalizeList(data, "products");
+
+      $("productCount").textContent = allProducts.length;
+
+      $("stockCount").textContent = allProducts.reduce(
+        (total, product) =>
+          total + Math.max(0, Number(product.stock) || 0),
+        0
+      );
+
+      renderProducts();
+
+    } catch (error) {
+      $("productsBody").innerHTML =
+        '<tr><td colspan="5">পণ্য লোড করা যায়নি।</td></tr>';
+
+      message(
+        "productsMsg",
+        "পণ্য লোড হয়নি: " + error.message,
+        "error"
+      );
+    }
   }
 
-  adminToken = token;
 
-  try {
-    await request("/api/products?all=1");
+  // -------------------------
+  // RENDER PRODUCTS
+  // -------------------------
 
-    document.getElementById("loginCard").classList.add("hidden");
-    document.getElementById("dashboard").classList.remove("hidden");
+  function renderProducts() {
+    const query = $("productSearch").value
+      .trim()
+      .toLowerCase();
 
-    msg("globalMsg", "সফলভাবে সংযুক্ত হয়েছে।");
+    const filtered = allProducts.filter(product => {
+      const text = [
+        product.name,
+        product.category,
+        product.description
+      ].join(" ").toLowerCase();
 
-    await loadProducts();
-    await loadOrders();
-  } catch (error) {
-    adminToken = "";
-    msg("loginMsg", "লগইন হয়নি: " + error.message);
+      return text.includes(query);
+    });
+
+    if (!filtered.length) {
+      $("productsBody").innerHTML =
+        '<tr><td colspan="5">কোনো পণ্য পাওয়া যায়নি।</td></tr>';
+
+      return;
+    }
+
+    $("productsBody").innerHTML = filtered.map(product => {
+      const id = escapeHTML(product.id);
+
+      const image = product.image_url
+        ? '<img class="product-image" src="' +
+          escapeHTML(product.image_url) +
+          '" alt="" loading="lazy">'
+        : "—";
+
+      const activeText = Number(product.active) === 0
+        ? '<br><span class="muted">নিষ্ক্রিয়</span>'
+        : "";
+
+      return `
+        <tr>
+          <td>${image}</td>
+
+          <td>
+            <strong>${escapeHTML(product.name)}</strong>
+            <br>
+            <span class="muted">
+              ${escapeHTML(product.category || "")}
+            </span>
+            <br>
+            <span class="muted">
+              ${escapeHTML(product.description || "")}
+            </span>
+          </td>
+
+          <td>
+            ${money(product.price)}
+            ${
+              product.old_price
+                ? '<br><span class="muted">আগের মূল্য: ' +
+                  money(product.old_price) +
+                  "</span>"
+                : ""
+            }
+          </td>
+
+          <td>
+            ${escapeHTML(product.stock ?? 0)}
+            ${activeText}
+          </td>
+
+          <td>
+            <div class="actions">
+              <button
+                class="small"
+                data-edit="${id}"
+              >এডিট</button>
+
+              <button
+                class="small danger"
+                data-hide="${id}"
+              >লুকান</button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join("");
+
+    $("productsBody")
+      .querySelectorAll("[data-edit]")
+      .forEach(button => {
+        button.addEventListener("click", () => {
+          editProduct(button.dataset.edit);
+        });
+      });
+
+    $("productsBody")
+      .querySelectorAll("[data-hide]")
+      .forEach(button => {
+        button.addEventListener("click", () => {
+          hideProduct(button.dataset.hide);
+        });
+      });
   }
-}
 
-function logout() {
-  adminToken = "";
-  document.getElementById("token").value = "";
-  document.getElementById("dashboard").classList.add("hidden");
-  document.getElementById("loginCard").classList.remove("hidden");
-  msg("loginMsg", "আপনি লগআউট করেছেন।");
-}
 
-function showTab(tabId) {
-  document.getElementById("productsTab").classList.add("hidden");
-  document.getElementById("ordersTab").classList.add("hidden");
-  document.getElementById(tabId).classList.remove("hidden");
-}
+  $("productSearch").addEventListener("input", renderProducts);
 
-function clearForm() {
-  document.getElementById("productForm").reset();
-  document.getElementById("productId").value = "";
-  document.getElementById("stock").value = 1;
-  document.getElementById("saveBtn").textContent = "পণ্য সংরক্ষণ করুন";
-}
+  $("refreshProducts").addEventListener("click", loadProducts);
 
-async function saveProduct(event) {
-  event.preventDefault();
 
-  const id = document.getElementById("productId").value;
+  // -------------------------
+  // EDIT PRODUCT
+  // -------------------------
 
-  const product = {
-    name: document.getElementById("name").value.trim(),
-    category: document.getElementById("category").value.trim(),
-    price: Number(document.getElementById("price").value),
-    old_price: document.getElementById("old_price").value === ""
-      ? null
-      : Number(document.getElementById("old_price").value),
-    stock: Number(document.getElementById("stock").value || 0),
-    image_url: document.getElementById("image_url").value.trim(),
-    description: document.getElementById("description").value.trim()
-  };
-
-  try {
-    await request(
-      id ? "/api/products/" + encodeURIComponent(id) : "/api/products",
-      {
-        method: id ? "PUT" : "POST",
-        body: JSON.stringify(product)
-      }
+  function editProduct(id) {
+    const product = allProducts.find(
+      item => String(item.id) === String(id)
     );
 
-    msg("productMsg", "পণ্য সফলভাবে সংরক্ষণ হয়েছে।");
-    clearForm();
-    await loadProducts();
-  } catch (error) {
-    msg("productMsg", "পণ্য সংরক্ষণ হয়নি: " + error.message);
-  }
-}
-</script>
-
-async function loadProducts() {
-  try {
-    const data = await request("/api/products?all=1");
-    const products = Array.isArray(data)
-      ? data
-      : (data.products || []);
-
-    const list = document.getElementById("productList");
-
-    if (!products.length) {
-      list.innerHTML = "<p>এখনো কোনো পণ্য যোগ করা হয়নি।</p>";
+    if (!product) {
+      message(
+        "productsMsg",
+        "পণ্যটি পাওয়া যায়নি।",
+        "error"
+      );
       return;
     }
 
-    list.innerHTML = products.map(p => `
-      <div class="product">
-        <h3>${escapeHTML(p.name || "")}</h3>
-        <p>দাম: ৳${escapeHTML(p.price ?? "")}</p>
-        <p>স্টক: ${escapeHTML(p.stock ?? 0)}</p>
-        <p>ক্যাটাগরি: ${escapeHTML(p.category || "—")}</p>
-        <p>${escapeHTML(p.description || "")}</p>
-        <button onclick="editProduct('${escapeHTML(p.id)}')">
-          Edit
-        </button>
-        <button class="danger"
-          onclick="hideProduct('${escapeHTML(p.id)}')">
-          পণ্য লুকান
-        </button>
-      </div>
-    `).join("");
-  } catch (error) {
-    msg("productMsg", "পণ্য লোড হয়নি: " + error.message);
+    $("productId").value = product.id;
+    $("name").value = product.name || "";
+    $("description").value = product.description || "";
+    $("price").value = product.price ?? "";
+    $("oldPrice").value = product.old_price ?? "";
+    $("imageUrl").value = product.image_url || "";
+    $("category").value = product.category || "";
+    $("stock").value = product.stock ?? 0;
+
+    $("formTitle").textContent = "✏️ পণ্য এডিট করুন";
+    $("saveBtn").textContent = "পরিবর্তন সংরক্ষণ করুন";
+
+    openTab("formTab");
   }
-}
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[character]);
-}
 
-async function editProduct(id) {
-  try {
-    const data = await request("/api/products?all=1");
-    const products = Array.isArray(data)
-      ? data
-      : (data.products || []);
+  // -------------------------
+  // HIDE PRODUCT
+  // -------------------------
 
-    const p = products.find(item => String(item.id) === String(id));
-
-    if (!p) {
-      msg("productMsg", "পণ্যটি পাওয়া যায়নি।");
+  async function hideProduct(id) {
+    if (
+      !confirm(
+        "এই পণ্যটি ওয়েবসাইট থেকে লুকাতে চান?"
+      )
+    ) {
       return;
     }
 
-    document.getElementById("productId").value = p.id;
-    document.getElementById("name").value = p.name || "";
-    document.getElementById("category").value = p.category || "";
-    document.getElementById("price").value = p.price ?? "";
-    document.getElementById("old_price").value = p.old_price ?? "";
-    document.getElementById("stock").value = p.stock ?? 0;
-    document.getElementById("image_url").value = p.image_url || "";
-    document.getElementById("description").value = p.description || "";
+    try {
+      await request(
+        "/api/products/" + encodeURIComponent(id),
+        { method: "DELETE" }
+      );
 
-    document.getElementById("saveBtn").textContent =
-      "পরিবর্তন সংরক্ষণ করুন";
+      message(
+        "productsMsg",
+        "পণ্যটি লুকানো হয়েছে।",
+        "success"
+      );
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } catch (error) {
-    msg("productMsg", "এডিট করা যায়নি: " + error.message);
+      await loadProducts();
+
+    } catch (error) {
+      message(
+        "productsMsg",
+        "পণ্য লুকানো যায়নি: " + error.message,
+        "error"
+      );
+    }
   }
-}
 
-async function hideProduct(id) {
-  if (!confirm("এই পণ্যটি ওয়েবসাইট থেকে লুকাতে চান?")) return;
 
-  try {
-    await request("/api/products/" + encodeURIComponent(id), {
-      method: "DELETE"
+  // -------------------------
+  // LOAD ORDERS
+  // -------------------------
+
+  async function loadOrders() {
+    $("ordersBody").innerHTML =
+      '<tr><td colspan="6">অর্ডার লোড হচ্ছে…</td></tr>';
+
+    try {
+      const data = await request("/api/orders");
+
+      allOrders = normalizeList(data, "orders");
+
+      $("orderCount").textContent = allOrders.length;
+
+      renderOrders();
+
+    } catch (error) {
+      $("ordersBody").innerHTML =
+        '<tr><td colspan="6">অর্ডার লোড করা যায়নি।</td></tr>';
+
+      message(
+        "ordersMsg",
+        "অর্ডার লোড হয়নি: " + error.message,
+        "error"
+      );
+    }
+  }
+
+
+  // -------------------------
+  // RENDER ORDERS
+  // -------------------------
+
+  function renderOrders() {
+    const query = $("orderSearch").value
+      .trim()
+      .toLowerCase();
+
+    const filtered = allOrders.filter(order => {
+      const text = [
+        order.id,
+        order.customer_name,
+        order.phone,
+        order.address
+      ].join(" ").toLowerCase();
+
+      return text.includes(query);
     });
 
-    msg("productMsg", "পণ্যটি লুকানো হয়েছে।");
-    await loadProducts();
-  } catch (error) {
-    msg("productMsg", "পণ্য লুকানো যায়নি: " + error.message);
-  }
-}
+    if (!filtered.length) {
+      $("ordersBody").innerHTML =
+        '<tr><td colspan="6">কোনো অর্ডার পাওয়া যায়নি।</td></tr>';
 
-async function loadOrders() {
-  try {
-    const data = await request("/api/orders");
-    const orders = Array.isArray(data)
-      ? data
-      : (data.orders || []);
-
-    const body = document.getElementById("ordersBody");
-
-    if (!orders.length) {
-      body.innerHTML =
-        '<tr><td colspan="6">কোনো অর্ডার পাওয়া যায়নি।</td></tr>';
       return;
     }
 
-    body.innerHTML = orders.map(order => `
-      <tr>
-        <td>#${escapeHTML(order.id)}</td>
-        <td>
-          ${escapeHTML(order.customer_name || "")}<br>
-          ${escapeHTML(order.phone || "")}
-        </td>
-        <td>${escapeHTML(order.address || "")}</td>
-        <td>৳${escapeHTML(order.total ?? "")}</td>
-        <td>
-          <select id="status-${escapeHTML(order.id)}">
-            ${["pending","confirmed","processing","shipped","delivered","cancelled"]
-              .map(status => `
-                <option value="${status}"
-                  ${status === (order.status || "pending") ? "selected" : ""}>
-                  ${status}
-                </option>
-              `).join("")}
-          </select>
-        </td>
-        <td>
-          <button onclick="updateOrderStatus('${escapeHTML(order.id)}')">
-            আপডেট
-          </button>
-        </td>
-      </tr>
-    `).join("");
-  } catch (error) {
-    msg("ordersMsg", "অর্ডার লোড হয়নি: " + error.message);
+    const statuses = [
+      "pending",
+      "confirmed",
+      "processing",
+      "shipped",
+      "delivered",
+      "cancelled"
+    ];
+
+    $("ordersBody").innerHTML = filtered.map(order => {
+      const id = escapeHTML(order.id);
+      const currentStatus = String(
+        order.status || "pending"
+      );
+
+      const options = statuses.map(status => `
+        <option
+          value="${status}"
+          ${status === currentStatus ? "selected" : ""}
+        >${status}</option>
+      `).join("");
+
+      return `
+        <tr>
+          <td>
+            #${id}
+            <br>
+            <span class="muted">
+              ${escapeHTML(order.created_at || "")}
+            </span>
+          </td>
+
+          <td>
+            <strong>
+              ${escapeHTML(order.customer_name || "")}
+            </strong>
+            <br>
+            ${escapeHTML(order.phone || "")}
+          </td>
+
+          <td>
+            ${escapeHTML(order.address || "")}
+            <br>
+            <span class="muted">
+              ${escapeHTML(order.note || "")}
+            </span>
+          </td>
+
+          <td>${money(order.total)}</td>
+
+          <td>
+            <select data-status="${id}">
+              ${options}
+            </select>
+          </td>
+
+          <td>
+            <button
+              class="small"
+              data-update="${id}"
+            >আপডেট</button>
+          </td>
+        </tr>
+      `;
+    }).join("");
+
+    $("ordersBody")
+      .querySelectorAll("[data-update]")
+      .forEach(button => {
+        button.addEventListener("click", () => {
+          updateOrderStatus(button.dataset.update);
+        });
+      });
   }
-}
 
-async function updateOrderStatus(id) {
-  const status = document.getElementById("status-" + id).value;
 
-  try {
-    await request("/api/orders/" + encodeURIComponent(id) + "/status", {
-      method: "PATCH",
-      body: JSON.stringify({ status })
-    });
+  $("orderSearch").addEventListener("input", renderOrders);
 
-    msg("ordersMsg", "অর্ডারের স্ট্যাটাস আপডেট হয়েছে।");
-    await loadOrders();
-  } catch (error) {
-    msg("ordersMsg", "স্ট্যাটাস আপডেট হয়নি: " + error.message);
+  $("refreshOrders").addEventListener("click", loadOrders);
+
+
+  // -------------------------
+  // UPDATE ORDER STATUS
+  // -------------------------
+
+  async function updateOrderStatus(id) {
+    const select = Array.from(
+      $("ordersBody").querySelectorAll("[data-status]")
+    ).find(element => element.dataset.status === String(id));
+
+    if (!select) return;
+
+    try {
+      await request(
+        "/api/orders/" +
+        encodeURIComponent(id) +
+        "/status",
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            status: select.value
+          })
+        }
+      );
+
+      message(
+        "ordersMsg",
+        "অর্ডারের স্ট্যাটাস আপডেট হয়েছে।",
+        "success"
+      );
+
+      await loadOrders();
+
+    } catch (error) {
+      message(
+        "ordersMsg",
+        "স্ট্যাটাস আপডেট হয়নি: " + error.message,
+        "error"
+      );
+    }
   }
-}
+
+
+  // -------------------------
+  // RESTORE SESSION
+  // -------------------------
+
+  const savedToken = sessionStorage.getItem(
+    "pandagizmo_admin_token"
+  );
+
+  if (savedToken) {
+    adminToken = savedToken;
+
+    request("/api/products?all=1")
+      .then(() => {
+        showDashboard();
+        loadProducts();
+        loadOrders();
+      })
+      .catch(() => {
+        sessionStorage.removeItem(
+          "pandagizmo_admin_token"
+        );
+
+        adminToken = "";
+      });
+  }
+
+})();
 </script>
 
 </body>
