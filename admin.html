@@ -2,47 +2,580 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PandaGizmo BD | Admin Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PandaGizmo BD Admin Panel</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f0f9ff;color:#172554}
-header{background:#0284c7;color:white;padding:20px;text-align:center}
-main{max-width:650px;margin:25px auto;padding:15px}
-.card{background:white;padding:20px;border-radius:16px;margin-bottom:18px;box-shadow:0 4px 15px #0001}
-h2{margin-top:0;color:#0369a1}
-input,select,button{width:100%;padding:13px;margin:8px 0;border-radius:9px;font-size:16px}
-input,select{border:1px solid #cbd5e1}
-button{background:#0284c7;color:white;border:0;font-weight:bold}
-.note{font-size:14px;line-height:1.6;color:#475569}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f9ff;
+  color: #1e293b;
+}
+
+header {
+  background: linear-gradient(120deg, #0284c7, #38bdf8);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px 14px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 15px #0f172a0a;
+}
+
+h2 {
+  color: #0f172a;
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: bold;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 85px;
+}
+
+button {
+  background: #0284c7;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 11px 15px;
+  margin-top: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.secondary {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.notice {
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background: #e0f2fe;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.product {
+  border: 1px solid #dbeafe;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 10px 0;
+  overflow-wrap: anywhere;
+}
+
+.product img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>🐼 PandaGizmo BD</h1>
-<p>Admin Panel</p>
+  <h1>🐼 PandaGizmo BD</h1>
+  <p>Admin Panel — পণ্য ও অর্ডার ব্যবস্থাপনা</p>
 </header>
+
 <main>
-<section class="card">
-<h2>🔐 অ্যাডমিন লগইন</h2>
-<p class="note">এই পেজটি শুধু অ্যাডমিন ব্যবহারের জন্য। নিরাপদ লগইনের জন্য সার্ভার সেটআপ প্রয়োজন।</p>
-<label>অ্যাডমিন পাসওয়ার্ড</label>
-<input type="password" id="password" placeholder="পাসওয়ার্ড লিখুন">
-<button onclick="login()">লগইন</button>
-<p id="message" class="note"></p>
+
+<section class="card" id="loginCard">
+  <h2>🔐 অ্যাডমিন লগইন</h2>
+
+  <p>
+    আপনার Cloudflare Worker-এর ADMIN_TOKEN লিখুন।
+    এটি কারও সঙ্গে শেয়ার করবেন না।
+  </p>
+
+  <label for="token">ADMIN_TOKEN</label>
+  <input
+    type="password"
+    id="token"
+    placeholder="অ্যাডমিন টোকেন লিখুন"
+    autocomplete="current-password"
+  >
+
+  <button id="loginBtn" onclick="login()">
+    লগইন করুন
+  </button>
+
+  <p id="loginMsg" class="notice"></p>
 </section>
 
-<section class="card" id="dashboard" hidden>
-<h2>📦 অর্ডার ম্যানেজমেন্ট</h2>
-<p class="note">অর্ডার দেখার সুবিধা চালু করতে Cloudflare Worker ও Database সংযোগ করতে হবে।</p>
-<button onclick="alert('পরবর্তী ধাপে Database সংযোগ করব।')">অর্ডার দেখুন</button>
+<section id="dashboard" class="hidden">
+
+  <section class="card">
+    <h2>📊 অ্যাডমিন ড্যাশবোর্ড</h2>
+    <button class="danger" onclick="logout()">লগআউট</button>
+
+    <div class="tabs">
+      <button onclick="showTab('productsTab')">
+        📦 পণ্য
+      </button>
+
+      <button onclick="showTab('ordersTab')">
+        🛒 অর্ডার
+      </button>
+    </div>
+
+    <p id="globalMsg" class="notice">
+      অ্যাডমিন প্যানেলে স্বাগতম।
+    </p>
+  </section>
+
+  <section class="card" id="productsTab">
+    <h2>📦 পণ্য যোগ করুন / পরিবর্তন করুন</h2>
+
+    <form id="productForm" onsubmit="saveProduct(event)">
+      <input type="hidden" id="productId">
+
+      <div class="row">
+        <div>
+          <label for="name">পণ্যের নাম *</label>
+          <input id="name" required>
+        </div>
+
+        <div>
+          <label for="category">ক্যাটাগরি</label>
+          <input id="category" placeholder="যেমন: Earphones">
+        </div>
+
+        <div>
+          <label for="price">বিক্রয়মূল্য (৳) *</label>
+          <input id="price" type="number" min="0" required>
+        </div>
+
+        <div>
+          <label for="old_price">আগের মূল্য (৳)</label>
+          <input id="old_price" type="number" min="0">
+        </div>
+
+        <div>
+          <label for="stock">স্টকের পরিমাণ</label>
+          <input id="stock" type="number" min="0" value="1">
+        </div>
+
+        <div>
+          <label for="image_url">পণ্যের ছবির URL</label>
+          <input id="image_url" type="url" placeholder="https://...">
+        </div>
+      </div>
+
+      <label for="description">পণ্যের বিবরণ</label>
+      <textarea id="description"></textarea>
+
+      <button type="submit" id="saveBtn">
+        পণ্য সংরক্ষণ করুন
+      </button>
+
+      <button
+        type="button"
+        class="secondary"
+        onclick="clearForm()"
+      >
+        ফর্ম পরিষ্কার
+      </button>
+    </form>
+
+    <p id="productMsg" class="notice"></p>
+
+    <hr>
+
+    <h2>🧾 পণ্যের তালিকা</h2>
+    <button onclick="loadProducts()">পণ্য রিফ্রেশ করুন</button>
+    <div id="productList"></div>
+  </section>
+
+  <section class="card hidden" id="ordersTab">
+    <h2>🛒 অর্ডার ম্যানেজমেন্ট</h2>
+
+    <button onclick="loadOrders()">অর্ডার রিফ্রেশ করুন</button>
+
+    <p id="ordersMsg" class="notice"></p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>অর্ডার</th>
+            <th>ক্রেতা</th>
+            <th>ঠিকানা</th>
+            <th>মোট</th>
+            <th>স্ট্যাটাস</th>
+            <th>আপডেট</th>
+          </tr>
+        </thead>
+
+        <tbody id="ordersBody">
+          <tr>
+            <td colspan="6">অর্ডার লোড করুন।</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
 </section>
 </main>
+
 <script>
-function login(){
-document.getElementById('message').textContent=
-'নিরাপদ সার্ভার লগইন এখনো সংযুক্ত হয়নি। পরবর্তী ধাপে সেটআপ করতে হবে।';
+const API = "https://pandashop-bd-api-2026.pandagizmofficial.workers.dev";
+let adminToken = "";
+
+function msg(id, text) {
+  document.getElementById(id).textContent = text;
+}
+
+async function request(path, options = {}) {
+  const response = await fetch(API + path, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + adminToken,
+      ...(options.headers || {})
+    }
+  });
+
+  const text = await response.text();
+  let data;
+
+  try {
+    data = JSON.parse(text);
+  } catch {
+    data = { error: text || "সার্ভার থেকে উত্তর পাওয়া যায়নি।" };
+  }
+
+  if (!response.ok) {
+    throw new Error(data.error || data.message || "Request failed");
+  }
+
+  return data;
+}
+
+async function login() {
+  const token = document.getElementById("token").value.trim();
+
+  if (!token) {
+    msg("loginMsg", "ADMIN_TOKEN লিখুন।");
+    return;
+  }
+
+  adminToken = token;
+
+  try {
+    await request("/api/products?all=1");
+
+    document.getElementById("loginCard").classList.add("hidden");
+    document.getElementById("dashboard").classList.remove("hidden");
+
+    msg("globalMsg", "সফলভাবে সংযুক্ত হয়েছে।");
+
+    await loadProducts();
+    await loadOrders();
+  } catch (error) {
+    adminToken = "";
+    msg("loginMsg", "লগইন হয়নি: " + error.message);
+  }
+}
+
+function logout() {
+  adminToken = "";
+  document.getElementById("token").value = "";
+  document.getElementById("dashboard").classList.add("hidden");
+  document.getElementById("loginCard").classList.remove("hidden");
+  msg("loginMsg", "আপনি লগআউট করেছেন।");
+}
+
+function showTab(tabId) {
+  document.getElementById("productsTab").classList.add("hidden");
+  document.getElementById("ordersTab").classList.add("hidden");
+  document.getElementById(tabId).classList.remove("hidden");
+}
+
+function clearForm() {
+  document.getElementById("productForm").reset();
+  document.getElementById("productId").value = "";
+  document.getElementById("stock").value = 1;
+  document.getElementById("saveBtn").textContent = "পণ্য সংরক্ষণ করুন";
+}
+
+async function saveProduct(event) {
+  event.preventDefault();
+
+  const id = document.getElementById("productId").value;
+
+  const product = {
+    name: document.getElementById("name").value.trim(),
+    category: document.getElementById("category").value.trim(),
+    price: Number(document.getElementById("price").value),
+    old_price: document.getElementById("old_price").value === ""
+      ? null
+      : Number(document.getElementById("old_price").value),
+    stock: Number(document.getElementById("stock").value || 0),
+    image_url: document.getElementById("image_url").value.trim(),
+    description: document.getElementById("description").value.trim()
+  };
+
+  try {
+    await request(
+      id ? "/api/products/" + encodeURIComponent(id) : "/api/products",
+      {
+        method: id ? "PUT" : "POST",
+        body: JSON.stringify(product)
+      }
+    );
+
+    msg("productMsg", "পণ্য সফলভাবে সংরক্ষণ হয়েছে।");
+    clearForm();
+    await loadProducts();
+  } catch (error) {
+    msg("productMsg", "পণ্য সংরক্ষণ হয়নি: " + error.message);
+  }
 }
 </script>
+
+async function loadProducts() {
+  try {
+    const data = await request("/api/products?all=1");
+    const products = Array.isArray(data)
+      ? data
+      : (data.products || []);
+
+    const list = document.getElementById("productList");
+
+    if (!products.length) {
+      list.innerHTML = "<p>এখনো কোনো পণ্য যোগ করা হয়নি।</p>";
+      return;
+    }
+
+    list.innerHTML = products.map(p => `
+      <div class="product">
+        <h3>${escapeHTML(p.name || "")}</h3>
+        <p>দাম: ৳${escapeHTML(p.price ?? "")}</p>
+        <p>স্টক: ${escapeHTML(p.stock ?? 0)}</p>
+        <p>ক্যাটাগরি: ${escapeHTML(p.category || "—")}</p>
+        <p>${escapeHTML(p.description || "")}</p>
+        <button onclick="editProduct('${escapeHTML(p.id)}')">
+          Edit
+        </button>
+        <button class="danger"
+          onclick="hideProduct('${escapeHTML(p.id)}')">
+          পণ্য লুকান
+        </button>
+      </div>
+    `).join("");
+  } catch (error) {
+    msg("productMsg", "পণ্য লোড হয়নি: " + error.message);
+  }
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+async function editProduct(id) {
+  try {
+    const data = await request("/api/products?all=1");
+    const products = Array.isArray(data)
+      ? data
+      : (data.products || []);
+
+    const p = products.find(item => String(item.id) === String(id));
+
+    if (!p) {
+      msg("productMsg", "পণ্যটি পাওয়া যায়নি।");
+      return;
+    }
+
+    document.getElementById("productId").value = p.id;
+    document.getElementById("name").value = p.name || "";
+    document.getElementById("category").value = p.category || "";
+    document.getElementById("price").value = p.price ?? "";
+    document.getElementById("old_price").value = p.old_price ?? "";
+    document.getElementById("stock").value = p.stock ?? 0;
+    document.getElementById("image_url").value = p.image_url || "";
+    document.getElementById("description").value = p.description || "";
+
+    document.getElementById("saveBtn").textContent =
+      "পরিবর্তন সংরক্ষণ করুন";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } catch (error) {
+    msg("productMsg", "এডিট করা যায়নি: " + error.message);
+  }
+}
+
+async function hideProduct(id) {
+  if (!confirm("এই পণ্যটি ওয়েবসাইট থেকে লুকাতে চান?")) return;
+
+  try {
+    await request("/api/products/" + encodeURIComponent(id), {
+      method: "DELETE"
+    });
+
+    msg("productMsg", "পণ্যটি লুকানো হয়েছে।");
+    await loadProducts();
+  } catch (error) {
+    msg("productMsg", "পণ্য লুকানো যায়নি: " + error.message);
+  }
+}
+
+async function loadOrders() {
+  try {
+    const data = await request("/api/orders");
+    const orders = Array.isArray(data)
+      ? data
+      : (data.orders || []);
+
+    const body = document.getElementById("ordersBody");
+
+    if (!orders.length) {
+      body.innerHTML =
+        '<tr><td colspan="6">কোনো অর্ডার পাওয়া যায়নি।</td></tr>';
+      return;
+    }
+
+    body.innerHTML = orders.map(order => `
+      <tr>
+        <td>#${escapeHTML(order.id)}</td>
+        <td>
+          ${escapeHTML(order.customer_name || "")}<br>
+          ${escapeHTML(order.phone || "")}
+        </td>
+        <td>${escapeHTML(order.address || "")}</td>
+        <td>৳${escapeHTML(order.total ?? "")}</td>
+        <td>
+          <select id="status-${escapeHTML(order.id)}">
+            ${["pending","confirmed","processing","shipped","delivered","cancelled"]
+              .map(status => `
+                <option value="${status}"
+                  ${status === (order.status || "pending") ? "selected" : ""}>
+                  ${status}
+                </option>
+              `).join("")}
+          </select>
+        </td>
+        <td>
+          <button onclick="updateOrderStatus('${escapeHTML(order.id)}')">
+            আপডেট
+          </button>
+        </td>
+      </tr>
+    `).join("");
+  } catch (error) {
+    msg("ordersMsg", "অর্ডার লোড হয়নি: " + error.message);
+  }
+}
+
+async function updateOrderStatus(id) {
+  const status = document.getElementById("status-" + id).value;
+
+  try {
+    await request("/api/orders/" + encodeURIComponent(id) + "/status", {
+      method: "PATCH",
+      body: JSON.stringify({ status })
+    });
+
+    msg("ordersMsg", "অর্ডারের স্ট্যাটাস আপডেট হয়েছে।");
+    await loadOrders();
+  } catch (error) {
+    msg("ordersMsg", "স্ট্যাটাস আপডেট হয়নি: " + error.message);
+  }
+}
+</script>
+
 </body>
 </html>
