@@ -148,29 +148,43 @@
         }
 
         async function loadProducts() {
-            try {
-                const response = await fetch(
-                    API_BASE + "/api/products"
-                );
+    const message = document.getElementById("message");
+    const productList = document.getElementById("productList");
 
-                if (!response.ok) {
-                    throw new Error("পণ্য লোড করা যায়নি");
-                }
+    try {
+        const response = await fetch(API_BASE + "/api/products");
+        if (!response.ok) throw new Error("পণ্য লোড হয়নি");
 
-                const data = await response.json();
+        const data = await response.json();
+        const products = Array.isArray(data) ? data : (data.products || []);
 
-                document.getElementById("message").textContent =
-                    "API থেকে পণ্যের তথ্য পাওয়া গেছে।";
-
-                console.log(data);
-
-            } catch (error) {
-                document.getElementById("message").textContent =
-                    "পণ্য লোড করা যায়নি। পরে আবার চেষ্টা করুন।";
-
-                console.error(error);
-            }
+        if (products.length === 0) {
+            message.textContent = "এখন কোনো পণ্য পাওয়া যায়নি।";
+            productList.innerHTML = "";
+            return;
         }
+
+        productList.innerHTML = products.map(function(p) {
+            const name = String(p.name || "পণ্যের নাম নেই");
+            const image = String(p.image_url || "");
+            const price = Number(p.price || 0);
+
+            return `
+                <div class="product-card">
+                    ${image ? `<img class="product-image" src="${image}" alt="">` : ""}
+                    <h3 class="product-name">${name}</h3>
+                    <p class="product-price">৳${price.toLocaleString("en-BD")}</p>
+                </div>
+            `;
+        }).join("");
+
+        message.textContent = "মোট " + products.length + "টি পণ্য পাওয়া গেছে।";
+
+    } catch (error) {
+        message.textContent = "পণ্য লোড করা যায়নি।";
+        console.error(error);
+    }
+}
 
         loadProducts();
     </script>
