@@ -1,193 +1,829 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PandaGizmo BD</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b2545">
+<meta name="description" content="PandaGizmo BD — আপনার পছন্দের স্মার্ট গ্যাজেট অনলাইনে অর্ডার করুন।">
+<title>PandaGizmo BD | Smart Gadgets</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5fbff;
-            color: #0b2545;
-        }
-
-        header {
-            background: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .hero {
-            margin: 25px;
-            padding: 35px;
-            border-radius: 20px;
-            background: linear-gradient(120deg, #0b2545, #168bd2);
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 38px;
-        }
-
-        button {
-            background: #168bd2;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        /* ===== PandaGizmo Product Cards ===== */
-
-#products {
-    padding: 20px;
+<style>
+:root {
+  --navy: #0b2545;
+  --blue: #168bd2;
+  --sky: #eaf7ff;
+  --light: #f5fbff;
+  --text: #172b43;
+  --muted: #718096;
+  --border: #dfebf4;
+  --green: #159b60;
 }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, "Noto Sans Bengali", sans-serif;
+  background: white;
+  color: var(--text);
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.container { width: 92%; max-width: 1180px; margin: auto; }
+
+.topbar {
+  background: var(--navy);
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+}
+header {
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+}
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 0;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.logo-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  color: white;
+  font-size: 25px;
+  background: linear-gradient(135deg, #38bdf8, var(--navy));
+}
+.logo span { color: var(--blue); }
+
+.search {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--light);
+}
+.search input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+.search button {
+  border: none;
+  background: var(--blue);
+  color: white;
+  padding: 0 16px;
+}
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 15px;
+  color: white;
+  background: var(--blue);
+  font-weight: bold;
+  text-align: center;
+}
+.whatsapp { background: var(--green); white-space: nowrap; }
+.nav {
+  display: flex;
+  gap: 24px;
+  padding: 11px 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: bold;
+}
+.nav a:hover { color: var(--blue); }
+
+.hero {
+  padding: 30px 0;
+  background: radial-gradient(circle at 85% 20%, #c7edff, transparent 35%),
+              linear-gradient(120deg, #f4fbff, #e4f5ff);
+}
+.hero-box {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: center;
+  gap: 25px;
+  padding: 35px;
+  border: 1px solid #d8edfa;
+  border-radius: 25px;
+  background: #ffffffc9;
+}
+.badge {
+  display: inline-block;
+  padding: 5px 11px;
+  border-radius: 30px;
+  color: #0879b9;
+  background: #dff4ff;
+  font-size: 12px;
+  font-weight: bold;
+}
+.hero h1 {
+  color: var(--navy);
+  font-size: clamp(30px, 4.5vw, 49px);
+  line-height: 1.2;
+  margin: 15px 0;
+}
+.hero p { color: var(--muted); max-width: 500px; }
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.hero-art {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+}
+.hero-circle {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #b9eaff, #edfaff);
+  box-shadow: 0 15px 40px #0b25451a;
+  font-size: 105px;
+}
+
+section.content-section { padding: 38px 0; }
+.soft { background: var(--light); }
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.section-heading h2 { margin: 0; color: var(--navy); font-size: 26px; }
+.section-heading p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 13px;
+}
+.category {
+  padding: 19px 8px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: white;
+  transition: .2s;
+}
+.category:hover { transform: translateY(-3px); border-color: var(--blue); }
+.category-icon {
+  width: 55px;
+  height: 55px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 8px;
+  border-radius: 15px;
+  background: var(--sky);
+  font-size: 28px;
+}
+.category strong { font-size: 13px; }
 
 .product-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
 }
-
 .product-card {
-    background: #ffffff;
-    border: 1px solid #dceaf4;
-    border-radius: 14px;
-    padding: 10px;
-    overflow: hidden;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: white;
+  transition: .2s;
 }
-
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px #0b254510;
+}
+.product-image-wrap {
+  position: relative;
+  height: 195px;
+  display: grid;
+  place-items: center;
+  background: #f5faff;
+  cursor: pointer;
+  overflow: hidden;
+}
 .product-image {
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
-    background: #f5fbff;
-    border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
 }
-
+.image-fallback { font-size: 45px; }
+.offer-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 4px 8px;
+  border-radius: 7px;
+  color: #c52642;
+  background: #ffedf0;
+  font-size: 11px;
+  font-weight: bold;
+}
+.product-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 12px;
+}
+.product-category {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: bold;
+}
 .product-name {
-    font-size: 15px;
-    line-height: 1.5;
-    margin: 10px 0;
-    overflow-wrap: anywhere;
+  min-height: 44px;
+  margin: 6px 0;
+  color: var(--navy);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.product-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.price-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding: 7px 0 12px;
+}
+.product-price { color: var(--navy); font-size: 19px; font-weight: bold; }
+.old-price { color: #8995a4; font-size: 12px; text-decoration: line-through; }
+.product-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.small-btn {
+  padding: 9px 5px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: white;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: bold;
+}
+.order-btn { color: white; background: var(--navy); }
+.status-box {
+  padding: 25px 15px;
+  border: 1px dashed #b8d8eb;
+  border-radius: 15px;
+  text-align: center;
+  color: var(--muted);
+  background: white;
+  grid-column: 1 / -1;
+}
+.status-box strong { display: block; color: var(--navy); font-size: 17px; }
+
+.benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.benefit {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: white;
+}
+.benefit-icon { font-size: 27px; }
+.benefit strong { display: block; color: var(--navy); font-size: 14px; }
+.benefit small { color: var(--muted); font-size: 12px; }
+
+footer { padding: 35px 0 18px; color: white; background: var(--navy); }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 25px; }
+footer h3, footer h4 { margin: 0 0 10px; }
+footer p, footer a { color: #c6d7e8; font-size: 13px; }
+.footer-links { display: grid; gap: 8px; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #ffffff25;
+  color: #afc4d9;
+  font-size: 12px;
 }
 
-.product-price {
-    color: #168bd2;
-    font-size: 18px;
-    font-weight: bold;
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: #061629aa;
 }
+.modal-backdrop.open { display: flex; }
+.modal {
+  position: relative;
+  width: min(700px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 20px;
+  background: white;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--sky);
+  font-size: 23px;
+}
+.modal-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 25px;
+}
+.modal-image {
+  width: 100%;
+  max-height: 330px;
+  object-fit: contain;
+  border-radius: 14px;
+  background: var(--light);
+}
+.modal h3 { color: var(--navy); line-height: 1.4; }
+.modal p { color: var(--muted); font-size: 14px; white-space: pre-line; }
 
-.product-old-price {
-    color: #888888;
-    font-size: 13px;
-    text-decoration: line-through;
+@media (max-width: 850px) {
+  .header-main { flex-wrap: wrap; }
+  .search { order: 3; flex-basis: 100%; }
+  .whatsapp { margin-left: auto; }
+  .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .categories { grid-template-columns: repeat(3, 1fr); }
 }
-
-@media (min-width: 700px) {
-    .product-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
+@media (max-width: 600px) {
+  .header-main { gap: 10px; padding: 10px 0; }
+  .logo { font-size: 17px; }
+  .logo-icon { width: 38px; height: 38px; font-size: 22px; }
+  .whatsapp { padding: 9px 10px; font-size: 12px; }
+  .nav { gap: 18px; font-size: 13px; }
+  .hero { padding: 17px 0; }
+  .hero-box { grid-template-columns: 1fr; padding: 23px 18px; gap: 8px; }
+  .hero h1 { font-size: 32px; }
+  .hero p { font-size: 14px; }
+  .hero-art { min-height: 150px; }
+  .hero-circle { width: 145px; height: 145px; font-size: 75px; }
+  section.content-section { padding: 27px 0; }
+  .section-heading h2 { font-size: 22px; }
+  .categories { grid-template-columns: repeat(2, 1fr); gap: 9px; }
+  .category { padding: 14px 6px; }
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .product-image-wrap { height: 150px; }
+  .product-info { padding: 9px; }
+  .product-name { font-size: 13px; min-height: 39px; }
+  .product-price { font-size: 17px; }
+  .product-actions { grid-template-columns: 1fr; }
+  .benefits, .footer-grid { grid-template-columns: 1fr; }
+  .section-heading { align-items: flex-start; }
+  .modal-content { grid-template-columns: 1fr; padding: 18px; }
+  .modal-image { max-height: 220px; }
 }
-        
-    </style>
+</style>
 </head>
 
 <body>
+<div class="topbar">📦 আপনার পছন্দের গ্যাজেট, এখন সহজেই অর্ডার করুন • PandaGizmo BD</div>
 
-    <header>
-        <div class="logo">🐼 PandaGizmo BD</div>
-        <button onclick="openWhatsApp()">WhatsApp</button>
-    </header>
+<header>
+  <div class="container header-main">
+    <a href="#home" class="logo">
+      <div class="logo-icon">🐼</div>
+      <div>Panda<span>Gizmo</span> BD</div>
+    </a>
 
-    <section class="hero">
-        <h1>টেক লাইফ হোক আরও স্মার্ট!</h1>
-        <p>
-            আপনার পছন্দের গ্যাজেট ও মোবাইল অ্যাক্সেসরিজ
-            খুঁজুন PandaGizmo BD-তে।
-        </p>
+    <form class="search" id="searchForm">
+      <input id="searchInput" type="search" placeholder="গ্যাজেট খুঁজুন..." aria-label="গ্যাজেট খুঁজুন">
+      <button type="submit">খুঁজুন</button>
+    </form>
 
-        <button onclick="showProducts()">
-            এখনই শপ করুন
-        </button>
-    </section>
+    <a class="btn whatsapp" href="https://wa.me/8801331199256" target="_blank" rel="noopener">🟢 WhatsApp</a>
+  </div>
 
-  <section id="products">
-    <h2>আমাদের পণ্য</h2>
+  <nav class="container nav">
+    <a href="#home">হোম</a>
+    <a href="#categories">ক্যাটাগরি</a>
+    <a href="#products">সব প্রোডাক্ট</a>
+    <a href="#offers">অফার</a>
+    <a href="#why-us">আমাদের সম্পর্কে</a>
+    <a href="#contact">যোগাযোগ</a>
+  </nav>
+</header>
 
-    <p id="message">পণ্য লোড হচ্ছে...</p>
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-box">
+      <div>
+        <span class="badge">WELCOME TO PANDAGIZMO BD</span>
+        <h1>টেক লাইফ হোক<br>আরও স্মার্ট! 💙</h1>
+        <p>আপনার পছন্দের গ্যাজেট ও মোবাইল অ্যাক্সেসরিজ খুঁজুন এক জায়গায়। পছন্দের প্রোডাক্ট দেখুন এবং WhatsApp-এ অর্ডার করুন।</p>
+        <div class="hero-actions">
+          <a href="#products" class="btn">🛍️ এখনই শপ করুন</a>
+          <a href="#categories" class="btn" style="background:#e5f5ff;color:#0b2545">ক্যাটাগরি দেখুন</a>
+        </div>
+      </div>
+      <div class="hero-art"><div class="hero-circle">🎧</div></div>
+    </div>
+  </section>
 
-    <div id="productList" class="product-grid"></div>
-</section>
+  <section class="content-section" id="categories">
+    <div class="container">
+      <div class="section-heading">
+        <div><h2>ক্যাটাগরি অনুযায়ী খুঁজুন</h2><p>আপনার প্রয়োজনের গ্যাজেটটি বেছে নিন।</p></div>
+      </div>
 
-    <script>
-        const API_BASE =
-            "https://pandashop-bd-api-2026.pandagizmofficial.workers.dev";
+      <div class="categories">
+        <a href="#products" class="category" data-category="Power Bank">
+          <div class="category-icon">🔋</div><strong>পাওয়ার ব্যাংক</strong>
+        </a>
+        <a href="#products" class="category" data-category="Audio">
+          <div class="category-icon">🎧</div><strong>অডিও ও ইয়ারফোন</strong>
+        </a>
+        <a href="#products" class="category" data-category="Mobile Accessories">
+          <div class="category-icon">📱</div><strong>মোবাইল অ্যাক্সেসরিজ</strong>
+        </a>
+        <a href="#products" class="category" data-category="Lighting">
+          <div class="category-icon">💡</div><strong>লাইটিং</strong>
+        </a>
+        <a href="#products" class="category" data-category="">
+          <div class="category-icon">⚙️</div><strong>সব গ্যাজেট</strong>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        function openWhatsApp() {
-            window.open(
-                "https://wa.me/8801331199256",
-                "_blank"
-            );
-        }
+  <section class="content-section soft" id="offers">
+    <div class="container">
+      <div class="section-heading">
+        <div><h2>🔥 বিশেষ অফার</h2><p>যেসব পণ্যের আগের দাম দেওয়া আছে, সেগুলো এখানে দেখাবে।</p></div>
+      </div>
+      <div id="offerList" class="product-grid">
+        <div class="status-box">অফার লোড হচ্ছে...</div>
+      </div>
+    </div>
+  </section>
 
-        function showProducts() {
-            document.getElementById("products").scrollIntoView({
-                behavior: "smooth"
-            });
-        }
+  <section class="content-section" id="products">
+    <div class="container">
+      <div class="section-heading">
+        <div><h2>আমাদের প্রোডাক্ট</h2><p id="productCount">আপনার পছন্দের গ্যাজেট কালেকশন</p></div>
+      </div>
 
-        async function loadProducts() {
-    const message = document.getElementById("message");
-    const productList = document.getElementById("productList");
+      <p id="message" style="color:#718096;font-size:13px" role="status">প্রোডাক্ট লোড হচ্ছে...</p>
+      <div id="productList" class="product-grid"></div>
+    </div>
+  </section>
 
-    try {
-        const response = await fetch(API_BASE + "/api/products");
-        if (!response.ok) throw new Error("পণ্য লোড হয়নি");
+  <section class="content-section soft" id="why-us">
+    <div class="container">
+      <div class="section-heading">
+        <div><h2>কেন PandaGizmo BD?</h2><p>সহজে প্রোডাক্ট দেখুন এবং অর্ডার করুন।</p></div>
+      </div>
 
-        const data = await response.json();
-        const products = Array.isArray(data) ? data : (data.products || []);
+      <div class="benefits">
+        <div class="benefit"><div class="benefit-icon">🔎</div><div><strong>সহজ প্রোডাক্ট সার্চ</strong><small>সার্চ করে পছন্দের আইটেম খুঁজুন।</small></div></div>
+        <div class="benefit"><div class="benefit-icon">💬</div><div><strong>WhatsApp অর্ডার</strong><small>প্রোডাক্টের নামসহ মেসেজ পাঠান।</small></div></div>
+        <div class="benefit"><div class="benefit-icon">📱</div><div><strong>মোবাইলবান্ধব ডিজাইন</strong><small>মোবাইল ও কম্পিউটার—দুই জায়গাতেই ব্যবহারযোগ্য।</small></div></div>
+      </div>
+    </div>
+  </section>
+</main>
 
-        if (products.length === 0) {
-            message.textContent = "এখন কোনো পণ্য পাওয়া যায়নি।";
-            productList.innerHTML = "";
-            return;
-        }
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>🐼 PandaGizmo BD</h3>
+        <p>আপনার দৈনন্দিন জীবনের দরকারি গ্যাজেট ও মোবাইল অ্যাক্সেসরিজ—এক জায়গায়।</p>
+      </div>
+      <div>
+        <h4>দ্রুত লিংক</h4>
+        <div class="footer-links">
+          <a href="#home">হোম</a>
+          <a href="#categories">ক্যাটাগরি</a>
+          <a href="#products">সব প্রোডাক্ট</a>
+          <a href="#offers">অফার</a>
+        </div>
+      </div>
+      <div>
+        <h4>অর্ডার ও যোগাযোগ</h4>
+        <div class="footer-links">
+          <a href="https://wa.me/8801331199256" target="_blank" rel="noopener">WhatsApp: 01331199256</a>
+          <a href="#products">প্রোডাক্ট দেখুন</a>
+        </div>
+        <p>অর্ডারের আগে প্রোডাক্টের বিস্তারিত ও ডেলিভারি তথ্য নিশ্চিত করে নিন।</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> PandaGizmo BD</span>
+      <span>Smart Gadgets • Smart Life 💙</span>
+    </div>
+  </div>
+</footer>
 
-        productList.innerHTML = products.map(function(p) {
-            const name = String(p.name || "পণ্যের নাম নেই");
-            const image = String(p.image_url || "");
-            const price = Number(p.price || 0);
+<div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-label="প্রোডাক্টের বিস্তারিত">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="বন্ধ করুন">×</button>
+    <div id="modalContent" class="modal-content"></div>
+  </div>
+</div>
 
-            return `
-                <div class="product-card">
-                    ${image ? `<img class="product-image" src="${image}" alt="">` : ""}
-                    <h3 class="product-name">${name}</h3>
-                    <p class="product-price">৳${price.toLocaleString("en-BD")}</p>
-                </div>
-            `;
-        }).join("");
+<script>
+const API_BASE = "https://pandashop-bd-api-2026.pandagizmofficial.workers.dev";
+const WHATSAPP_NUMBER = "8801331199256";
 
-        message.textContent = "মোট " + products.length + "টি পণ্য পাওয়া গেছে।";
+let allProducts = [];
+let visibleProducts = [];
+let offerProducts = [];
+let currentQuery = "";
+let currentCategory = "";
 
-    } catch (error) {
-        message.textContent = "পণ্য লোড করা যায়নি।";
-        console.error(error);
-    }
+const $ = id => document.getElementById(id);
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[char]));
 }
 
-        loadProducts();
-    </script>
+function money(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number) || value === null || value === "") {
+    return "দাম জানতে যোগাযোগ করুন";
+  }
+  return "৳" + number.toLocaleString("en-BD");
+}
 
+function hasOffer(product) {
+  const price = Number(product.price);
+  const oldPrice = Number(product.old_price);
+  return Number.isFinite(price) && Number.isFinite(oldPrice)
+    && price > 0 && oldPrice > price;
+}
+
+function imageHTML(product, className = "product-image") {
+  const src = String(product.image_url || product.image || "").trim();
+
+  if (!src) {
+    return '<div class="image-fallback">📦</div>';
+  }
+
+  return `<img class="${className}"
+    src="${escapeHTML(src)}"
+    alt="${escapeHTML(product.name || "প্রোডাক্ট")}"
+    loading="lazy"
+    onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div class=&quot;image-fallback&quot;>📦</div>')">`;
+}
+
+function productCard(product, index, listName) {
+  const sale = hasOffer(product);
+
+  return `
+    <article class="product-card">
+      <div class="product-image-wrap"
+           data-detail="${index}" data-list="${listName}"
+           role="button" tabindex="0">
+        ${sale ? '<span class="offer-label">অফার</span>' : ""}
+        ${imageHTML(product)}
+      </div>
+
+      <div class="product-info">
+        <div class="product-category">${escapeHTML(product.category || "Gadget")}</div>
+        <h3 class="product-name">${escapeHTML(product.name || "পণ্যের নাম নেই")}</h3>
+        ${product.description
+          ? `<p class="product-description">${escapeHTML(product.description)}</p>`
+          : ""}
+
+        <div class="price-row">
+          <span class="product-price">${money(product.price)}</span>
+          ${sale ? `<span class="old-price">${money(product.old_price)}</span>` : ""}
+        </div>
+
+        <div class="product-actions">
+          <button class="small-btn" data-detail="${index}" data-list="${listName}">বিস্তারিত</button>
+          <button class="small-btn order-btn" data-order="${index}" data-list="${listName}">অর্ডার করুন</button>
+        </div>
+      </div>
+    </article>`;
+}
+
+function renderProducts() {
+  const query = currentQuery.toLowerCase();
+
+  visibleProducts = allProducts.filter(product => {
+    const searchable = `${product.name || ""} ${product.description || ""} ${product.category || ""}`.toLowerCase();
+    const queryMatches = !query || searchable.includes(query);
+    const categoryMatches = !currentCategory ||
+      String(product.category || "").toLowerCase().includes(currentCategory.toLowerCase());
+
+    return queryMatches && categoryMatches;
+  });
+
+  $("productCount").textContent = `${visibleProducts.length}টি প্রোডাক্ট পাওয়া গেছে`;
+
+  $("productList").innerHTML = visibleProducts.length
+    ? visibleProducts.map((product, index) => productCard(product, index, "products")).join("")
+    : '<div class="status-box"><strong>কোনো প্রোডাক্ট পাওয়া যায়নি</strong>অন্য নামে সার্চ করে দেখুন।</div>';
+
+  offerProducts = allProducts.filter(hasOffer);
+
+  $("offerList").innerHTML = offerProducts.length
+    ? offerProducts.map((product, index) => productCard(product, index, "offers")).join("")
+    : '<div class="status-box"><strong>এখনো কোনো অফার নেই</strong>আগের দাম ও বর্তমান দামের পার্থক্য থাকলে এখানে দেখাবে।</div>';
+
+  $("message").textContent = allProducts.length
+    ? "আপনার পছন্দের প্রোডাক্ট বেছে নিন।"
+    : "এখন কোনো পণ্য পাওয়া যায়নি।";
+}
+
+function orderProduct(index, listName) {
+  const list = listName === "offers" ? offerProducts : visibleProducts;
+  const product = list[index];
+  if (!product) return;
+
+  const text = `আসসালামু আলাইকুম, আমি এই প্রোডাক্টটি অর্ডার করতে চাই।
+প্রোডাক্ট: ${product.name || "N/A"}
+দাম: ${money(product.price)}`;
+
+  window.open(
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,
+    "_blank",
+    "noopener"
+  );
+}
+
+function openDetails(index, listName) {
+  const list = listName === "offers" ? offerProducts : visibleProducts;
+  const product = list[index];
+  if (!product) return;
+
+  const sale = hasOffer(product);
+
+  $("modalContent").innerHTML = `
+    <div>${imageHTML(product, "modal-image")}</div>
+    <div>
+      <div class="product-category">${escapeHTML(product.category || "Gadget")}</div>
+      <h3>${escapeHTML(product.name || "পণ্যের নাম নেই")}</h3>
+      <p>${escapeHTML(product.description || "এই প্রোডাক্ট সম্পর্কে আরও জানতে WhatsApp-এ যোগাযোগ করুন।")}</p>
+      <div class="price-row">
+        <span class="product-price">${money(product.price)}</span>
+        ${sale ? `<span class="old-price">${money(product.old_price)}</span>` : ""}
+      </div>
+      <button class="btn whatsapp" id="modalOrder">🟢 WhatsApp-এ অর্ডার</button>
+    </div>`;
+
+  $("productModal").classList.add("open");
+
+  $("modalOrder").addEventListener("click", () => {
+    orderProduct(index, listName);
+  });
+}
+
+async function loadProducts() {
+  $("message").textContent = "প্রোডাক্ট লোড হচ্ছে...";
+
+  try {
+    const response = await fetch(API_BASE + "/api/products");
+
+    if (!response.ok) {
+      throw new Error("API response: " + response.status);
+    }
+
+    const data = await response.json();
+    const products = Array.isArray(data)
+      ? data
+      : (Array.isArray(data.products) ? data.products : []);
+
+    allProducts = products.filter(product =>
+      product &&
+      (product.active === undefined ||
+       product.active === true ||
+       product.active === 1 ||
+       product.active === "1")
+    );
+
+    renderProducts();
+  } catch (error) {
+    console.error("Product loading error:", error);
+
+    $("message").textContent =
+      "প্রোডাক্ট লোড করা যায়নি। কিছুক্ষণ পরে আবার চেষ্টা করুন।";
+
+    $("productList").innerHTML =
+      '<div class="status-box"><strong>প্রোডাক্ট লোড করা যায়নি</strong>ইন্টারনেট বা সার্ভারের সমস্যা হতে পারে।</div>';
+
+    $("offerList").innerHTML =
+      '<div class="status-box"><strong>অফার লোড করা যায়নি</strong>পরে আবার চেষ্টা করুন।</div>';
+  }
+}
+
+$("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  currentQuery = $("searchInput").value.trim();
+  renderProducts();
+  $("products").scrollIntoView({ behavior: "smooth" });
+});
+
+$("searchInput").addEventListener("input", () => {
+  currentQuery = $("searchInput").value.trim();
+  renderProducts();
+});
+
+document.querySelectorAll("[data-category]").forEach(category => {
+  category.addEventListener("click", () => {
+    currentCategory = category.dataset.category || "";
+    currentQuery = "";
+    $("searchInput").value = "";
+    renderProducts();
+  });
+});
+
+document.addEventListener("click", event => {
+  const detail = event.target.closest("[data-detail]");
+  const order = event.target.closest("[data-order]");
+
+  if (detail) {
+    openDetails(Number(detail.dataset.detail), detail.dataset.list);
+  }
+
+  if (order) {
+    orderProduct(Number(order.dataset.order), order.dataset.list);
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if ((event.key === "Enter" || event.key === " ") &&
+      event.target.matches(".product-image-wrap[data-detail]")) {
+    event.preventDefault();
+    openDetails(Number(event.target.dataset.detail), event.target.dataset.list);
+  }
+
+  if (event.key === "Escape") {
+    $("productModal").classList.remove("open");
+  }
+});
+
+$("modalClose").addEventListener("click", () => {
+  $("productModal").classList.remove("open");
+});
+
+$("productModal").addEventListener("click", event => {
+  if (event.target === $("productModal")) {
+    $("productModal").classList.remove("open");
+  }
+});
+
+$("year").textContent = new Date().getFullYear();
+
+loadProducts();
+</script>
 </body>
 </html>
