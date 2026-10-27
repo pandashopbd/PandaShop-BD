@@ -1,596 +1,2451 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b2545">
-<meta name="description" content="PandaGizmo BD — গ্যাজেট ও মোবাইল অ্যাক্সেসরিজ অনলাইন শপ।">
-<title>PandaGizmo BD | Online Gadget Store</title>
-<style>
-:root {
-  --navy: #0b2545;
-  --blue: #168bd2;
-  --sky: #eaf7ff;
-  --ink: #142b45;
-  --muted: #66788a;
-  --line: #dceaf4;
-  --bg: #f5fbff;
-  --green: #12845b;
-}
-* { box-sizing: border-box; }
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
-}
-body {
-  margin: 0;
-  font-family: Arial, "Noto Sans Bengali", sans-serif;
-  background: var(--bg);
-  color: var(--ink);
-  padding-bottom: 78px;
-}
-button, input, textarea, select {
-  font: inherit;
-}
-button { cursor: pointer; }
-.wrap {
-  width: min(1180px, 92%);
-  margin: auto;
-}
-.topbar {
-  background: var(--navy);
-  color: white;
-  padding: 9px 0;
-  font-size: 13px;
-}
-.topbar .wrap {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-header {
-  background: white;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-bottom: 1px solid var(--line);
-}
-.nav {
-  min-height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 10px 0;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  text-decoration: none;
-  color: var(--navy);
-  font-size: 20px;
-  font-weight: 900;
-  white-space: nowrap;
-}
-.brand-mark {
-  width: 43px;
-  height: 43px;
-  display: grid;
-  place-items: center;
-  background: var(--sky);
-  border-radius: 13px;
-  font-size: 27px;
-}
-.brand small {
-  display: block;
-  color: var(--blue);
-  font-size: 9px;
-  letter-spacing: 1px;
-}
-.searchbox {
-  flex: 1;
-  max-width: 450px;
-  display: flex;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--bg);
-}
-.searchbox input {
-  width: 100%;
-  min-width: 0;
-  padding: 12px;
-  border: 0;
-  outline: 0;
-  background: transparent;
-}
-.searchbox button {
-  border: 0;
-  padding: 0 16px;
-  background: var(--blue);
-  color: white;
-}
-.btn {
-  padding: 11px 15px;
-  border: 0;
-  border-radius: 10px;
-  font-weight: 700;
-}
-.primary { background: var(--blue); color: white; }
-.dark { background: var(--navy); color: white; }
-.light { background: var(--sky); color: var(--navy); }
-.hero { padding: 25px 0 10px; }
-.hero-panel {
-  padding: clamp(24px, 5vw, 55px);
-  border-radius: 24px;
-  color: white;
-  background: linear-gradient(120deg, #0b2545, #075b99, #168bd2);
-  display: grid;
-  grid-template-columns: 1.3fr .7fr;
-  align-items: center;
-  gap: 20px;
-}
-.eyebrow {
-  display: inline-block;
-  padding: 7px 12px;
-  border-radius: 30px;
-  background: #ffffff20;
-}
-.hero h1 {
-  font-size: clamp(29px, 4vw, 49px);
-  line-height: 1.2;
-  margin: 16px 0;
-}
-.hero p {
-  color: #e0f2ff;
-  line-height: 1.8;
-}
-.hero-buttons {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 18px;
-}
-.hero-circle {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: #ffffff25;
-  border: 1px solid #ffffff50;
-  font-size: 100px;
-}
-.trust {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 18px 0 28px;
-}
-.trust-item {
-  padding: 15px;
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-}
-.trust-item strong {
-  display: block;
-  margin-bottom: 6px;
-}
-.trust-item span {
-  color: var(--muted);
-  font-size: 13px;
-}
-.section { margin: 28px 0; }
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 12px;
-  margin: 20px 0 15px;
-}
-.section-head h2 {
-  color: var(--navy);
-  font-size: clamp(21px, 3vw, 28px);
-  margin: 0 0 6px;
-}
-.section-head p {
-  color: var(--muted);
-  margin: 0;
-  font-size: 14px;
-}
-.categories {
-  display: flex;
-  gap: 8px;
-  overflow: auto;
-  padding: 3px 0 14px;
-}
-.chip {
-  white-space: nowrap;
-  border: 1px solid var(--line);
-  border-radius: 30px;
-  padding: 9px 14px;
-  background: white;
-  color: var(--navy);
-  font-weight: bold;
-}
-.chip.active {
-  background: var(--navy);
-  color: white;
-}
-.products {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 15px;
-}
-.card {
-  position: relative;
-  padding: 11px;
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  min-width: 0;
-  transition: .2s;
-}
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px #173c5c15;
-}
-.product-image {
-  height: 170px;
-  border-radius: 11px;
-  background: linear-gradient(145deg, #eaf7ff, #f8fcff);
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  position: relative;
-}
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.emoji-product { font-size: 62px; }
-.tag {
-  display: inline-block;
-  color: #08764d;
-  background: #d9f7e8;
-  padding: 5px 8px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: bold;
-}
-.image-tag {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  z-index: 1;
-}
-.wish {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  border: 0;
-  background: #ffffffed;
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  font-size: 18px;
-  color: #c33;
-}
-.card h3 {
-  font-size: 14px;
-  line-height: 1.45;
-  min-height: 40px;
-  margin: 10px 0 5px;
-}
-.product-meta {
-  color: var(--muted);
-  font-size: 12px;
-  margin: 0 0 9px;
-}
-.price-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 5px;
-  flex-wrap: wrap;
-}
-.price {
-  font-size: 17px;
-  font-weight: bold;
-  color: var(--blue);
-}
-.old-price {
-  color: #8998a8;
-  text-decoration: line-through;
-  font-size: 12px;
-}
-.card-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7px;
-  margin-top: 10px;
-}
-.card-actions button {
-  padding: 9px 5px;
-  border: 0;
-  border-radius: 9px;
-  font-size: 12px;
-  font-weight: bold;
-}
-.add { background: var(--navy); color: white; }
-.details-btn { background: var(--sky); color: var(--navy); }
-.empty {
-  grid-column: 1 / -1;
-  background: white;
-  padding: 25px;
-  text-align: center;
-  border-radius: 15px;
-}
-.promo {
-  margin: 32px 0;
-  padding: 23px;
-  background: #dff3ff;
-  border-radius: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-}
-.promo h2 { margin: 0 0 8px; }
-.promo p { margin: 0; color: var(--muted); }
-footer {
-  background: var(--navy);
-  color: white;
-  margin-top: 40px;
-  padding: 32px 0 18px;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
-  gap: 22px;
-}
-.footer-grid p {
-  line-height: 1.8;
-  color: #d0e4f5;
-  font-size: 14px;
-}
-.footer-grid a { color: white; }
-.copyright {
-  margin-top: 22px;
-  padding-top: 15px;
-  border-top: 1px solid #ffffff30;
-  font-size: 12px;
-}
-.backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 30;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 14px;
-  background: #06172bd9;
-}
-.backdrop.open { display: flex; }
-.modal {
-  width: min(700px, 100%);
-  max-height: 92vh;
-  overflow: auto;
-  background: white;
-  border-radius: 18px;
-  padding: 20px;
-}
-.modal-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-.modal-head h2 {
-  font-size: 21px;
-  margin: 5px 0 16px;
-}
-.close {
-  border: 0;
-  background: var(--sky);
-  padding: 8px 11px;
-  border-radius: 8px;
-}
-.cart-row {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
-}
-.qty {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 9px;
-  flex-wrap: wrap;
-}
-.qty button {
-  padding: 5px 10px;
-  border: 1px solid var(--line);
-  background: var(--sky);
-  border-radius: 6px;
-}
-.remove {
-  color: #c0392b;
-  background: none !important;
-  border: 0 !important;
-}
-.total {
-  display: flex;
-  justify-content: space-between;
-  margin: 18px 0;
-  font-size: 19px;
-  font-weight: bold;
-}
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 11px;
-}
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.field.full { grid-column: 1 / -1; }
-.field label {
-  font-size: 13px;
-  font-weight: bold;
-}
-.field input,
-.field textarea {
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  padding: 11px;
-}
-.field textarea { min-height: 72px; }
-.note {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
-}
-.whatsapp {
-  width: 100%;
-  background: var(--green);
-  color: white;
-  margin-top: 10px;
-}
-.detail-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-.detail-image {
-  min-height: 250px;
-  background: var(--sky);
-  border-radius: 13px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-.detail-image img {
-  width: 100%;
-  height: 100%;
-  max-height: 350px;
-  object-fit: contain;
-}
-.detail-image .emoji-product { font-size: 100px; }
-.detail-copy h2 { margin: 8px 0; }
-.detail-copy p { line-height: 1.7; }
-.specs {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 12px 0;
-}
-.specs td {
-  padding: 9px;
-  border: 1px solid var(--line);
-  font-size: 13px;
-}
-.specs td:first-child {
-  font-weight: bold;
-  background: #f6fbff;
-}
-.detail-qty {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 12px 0;
-}
-.detail-qty button {
-  padding: 7px 12px;
-  border: 1px solid var(--line);
-  background: var(--sky);
-  border-radius: 7px;
-}
-.detail-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.bottom-nav {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 20;
-  background: #fff;
-  border-top: 1px solid var(--line);
-  padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
-  box-shadow: 0 -4px 20px #0b254510;
-}
-.bottom-nav button {
-  flex: 1;
-  background: none;
-  border: 0;
-  color: var(--muted);
-  font-size: 11px;
-  display: grid;
-  gap: 3px;
-  justify-items: center;
-}
-.bottom-nav b {
-  font-size: 20px;
-  font-weight: normal;
-}
-.bottom-nav button.active {
-  color: var(--blue);
-  font-weight: bold;
-}
-.toast {
-  position: fixed;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--navy);
-  color: white;
-  padding: 11px 16px;
-  border-radius: 10px;
-  z-index: 50;
-  display: none;
-  max-width: 90%;
-  text-align: center;
-}
-.toast.show { display: block; }
-@media (max-width: 850px) {
-  .nav { flex-wrap: wrap; }
-  .searchbox { order: 3; flex-basis: 100%; max-width: none; }
-  .products { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .hero-circle { width: 155px; height: 155px; font-size: 75px; }
-}
-@media (max-width: 600px) {
-  body { padding-bottom: 75px; }
-  .topbar .wrap { justify-content: center; text-align: center; }
-  .nav > div:last-child .light { display: none; }
-  .brand { font-size: 18px; }
-  .hero-panel { grid-template-columns: 1fr; }
-  .hero-circle { width: 110px; height: 110px; font-size: 60px; }
-  .hero-art { display: none; }
-  .trust { grid-template-columns: 1fr; gap: 8px; }
-  .trust-item { padding: 12px; }
-  .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
-  .product-image { height: 125px; }
-  .card { padding: 8px; }
-  .card h3 { font-size: 13px; }
-  .price { font-size: 15px; }
-  .card-actions { grid-template-columns: 1fr; }
-  .card-actions button { padding: 9px; }
-  .promo { flex-direction: column; align-items: flex-start; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .form-grid, .detail-grid { grid-template-columns: 1fr; }
-  .field.full { grid-column: auto; }
-  .bottom-nav { display: flex; }
-  .modal { padding: 15px; }
-  .detail-image { min-height: 200px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#087de1">
+
+  <title>PandaGizmo BD | Smart Gadgets Online Shop</title>
+
+  <meta name="description"
+    content="PandaGizmo BD থেকে স্মার্ট গ্যাজেট, মোবাইল এক্সেসরিজ ও প্রয়োজনীয় টেক প্রোডাক্ট কিনুন।">
+
+  <style>
+    :root {
+      --blue: #087de1;
+      --blue-dark: #0759a8;
+      --sky: #eaf6ff;
+      --navy: #102a43;
+      --text: #243b53;
+      --muted: #627d98;
+      --white: #ffffff;
+      --bg: #f5f9fd;
+      --border: #e1eaf2;
+      --green: #159447;
+      --shadow: 0 5px 22px rgba(16, 42, 67, .07);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 78px;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(1180px, 94%);
+      margin: auto;
+    }
+
+    /* Top bar */
+    .topbar {
+      background: var(--blue-dark);
+      color: white;
+      text-align: center;
+      font-size: 12px;
+      padding: 7px 10px;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.97);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-main {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 13px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 175px;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1499ff, #0759a8);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      box-shadow: 0 5px 14px #087de133;
+    }
+
+    .logo-name {
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .logo-name span {
+      color: var(--blue);
+    }
+
+    .logo-sub {
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 1.2px;
+    }
+
+    .search-box {
+      flex: 1;
+      display: flex;
+      background: #f3f8fc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .search-box input {
+      width: 100%;
+      min-width: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 12px 14px;
+      color: var(--navy);
+    }
+
+    .search-box button {
+      border: none;
+      background: var(--blue);
+      color: white;
+      padding: 0 18px;
+      font-size: 18px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      position: relative;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 12px;
+      min-width: 44px;
+      height: 44px;
+      font-size: 20px;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      border-radius: 20px;
+      background: #ef4444;
+      color: white;
+      font-size: 11px;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Navigation */
+    .nav {
+      border-top: 1px solid #f0f4f8;
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 25px;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 10px 0;
+      scrollbar-width: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav a:hover {
+      color: var(--blue);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 25px 0 15px;
+    }
+
+    .hero-card {
+      min-height: 290px;
+      border-radius: 25px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 85% 15%, #ffffff80, transparent 28%),
+        linear-gradient(120deg, #dff3ff, #a8dcff 55%, #d8efff);
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      padding: 35px 5%;
+      position: relative;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: white;
+      color: var(--blue-dark);
+      border-radius: 30px;
+      padding: 6px 13px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 13px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.2;
+      color: var(--navy);
+      max-width: 520px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #365a79;
+      max-width: 440px;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .primary-btn {
+      border: 0;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 11px;
+      color: white;
+      background: var(--blue);
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .primary-btn:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+
+    .hero-art {
+      display: grid;
+      place-items: center;
+      font-size: clamp(95px, 16vw, 175px);
+      filter: drop-shadow(0 15px 12px #0759a822);
+    }
+
+    /* Trust */
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 18px 0 28px;
+    }
+
+    .trust-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 2px 10px #102a4305;
+    }
+
+    .trust-icon {
+      font-size: 25px;
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 12px;
+      color: var(--navy);
+    }
+
+    .trust-item small {
+      display: block;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    /* Section */
+    .section {
+      padding: 15px 0 30px;
+      scroll-margin-top: 145px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .section-title {
+      font-size: clamp(21px, 3vw, 27px);
+      font-weight: 900;
+      color: var(--navy);
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .text-btn {
+      border: none;
+      background: transparent;
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    /* Categories */
+    .category-list {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 3px 1px 12px;
+      scrollbar-width: none;
+    }
+
+    .category-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-chip {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text);
+      border-radius: 30px;
+      padding: 10px 17px;
+      white-space: nowrap;
+      font-weight: 700;
+      font-size: 12px;
+      transition: .2s;
+    }
+
+    .category-chip.active,
+    .category-chip:hover {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    /* Products */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .product-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      transition: transform .2s, box-shadow .2s;
+      min-width: 0;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      background: #f0f7fc;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 12px;
+      display: block;
+      transition: transform .3s;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.04);
+    }
+
+    .product-placeholder {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      font-size: 65px;
+      color: #94a3b8;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+      background: #e53935;
+      color: white;
+      border-radius: 6px;
+      padding: 4px 7px;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 34px;
+      height: 34px;
+      border: none;
+      border-radius: 50%;
+      background: #ffffffed;
+      font-size: 19px;
+      z-index: 2;
+    }
+
+    .wishlist-btn.liked {
+      color: #e11d48;
+    }
+
+    .product-info {
+      padding: 13px;
+    }
+
+    .product-category {
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.45;
+      color: var(--navy);
+      margin: 5px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 40px;
+      cursor: pointer;
+    }
+
+    .product-description {
+      color: var(--muted);
+      font-size: 11px;
+      margin: 5px 0 9px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 32px;
+    }
+
+    .price-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+      margin: 9px 0 12px;
+    }
+
+    .current-price {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--blue-dark);
+    }
+
+    .old-price {
+      font-size: 12px;
+      color: #8a9aab;
+      text-decoration: line-through;
+    }
+
+    .product-actions {
+      display: grid;
+      grid-template-columns: 1fr 43px;
+      gap: 7px;
+    }
+
+    .add-cart-btn {
+      border: 1px solid var(--blue);
+      background: var(--blue);
+      color: white;
+      border-radius: 9px;
+      padding: 10px 7px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .details-btn {
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: white;
+      color: var(--navy);
+      font-size: 17px;
+    }
+
+    .stock-label {
+      font-size: 10px;
+      margin-top: 9px;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .stock-label.out {
+      color: #dc2626;
+    }
+
+    .empty-state,
+    .loading-state,
+    .error-state {
+      grid-column: 1 / -1;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .state-icon {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    /* Promo */
+    .promo {
+      margin: 10px 0 30px;
+      border-radius: 20px;
+      background: linear-gradient(120deg, #0759a8, #087de1);
+      color: white;
+      padding: 27px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .promo h2 {
+      font-size: 24px;
+      line-height: 1.3;
+    }
+
+    .promo p {
+      color: #e0f2fe;
+      font-size: 13px;
+      margin-top: 7px;
+    }
+
+    .promo .primary-btn {
+      background: white;
+      color: var(--blue-dark);
+      white-space: nowrap;
+    }
+
+    /* Footer */
+    .footer {
+      background: #102a43;
+      color: white;
+      padding: 35px 0 20px;
+      margin-top: 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 30px;
+    }
+
+    .footer h3 {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .footer p,
+    .footer a {
+      color: #c6d5e2;
+      font-size: 12px;
+    }
+
+    .footer a {
+      display: block;
+      margin: 7px 0;
+    }
+
+    .footer a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #ffffff20;
+      margin-top: 25px;
+      padding-top: 17px;
+      color: #c6d5e2;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: #102a4399;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(560px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px #0003;
+      animation: appear .2s ease;
+    }
+
+    @keyframes appear {
+      from { transform: translateY(12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-head h2 {
+      font-size: 19px;
+      color: var(--navy);
+    }
+
+    .close-btn {
+      width: 35px;
+      height: 35px;
+      border: none;
+      border-radius: 50%;
+      background: #edf4fa;
+      font-size: 21px;
+    }
+
+    .modal-content {
+      padding: 20px;
+    }
+
+    .detail-image {
+      width: 100%;
+      height: 230px;
+      object-fit: contain;
+      background: #f2f8fc;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .detail-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .detail-description {
+      white-space: pre-line;
+      color: var(--muted);
+      font-size: 14px;
+      margin: 12px 0;
+    }
+
+    /* Cart */
+    .cart-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 66px 1fr;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-thumb {
+      width: 66px;
+      height: 66px;
+      object-fit: contain;
+      background: #f2f8fc;
+      border-radius: 10px;
+    }
+
+    .cart-item-name {
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .cart-item-price {
+      color: var(--blue-dark);
+      font-weight: 900;
+      font-size: 13px;
+      margin: 4px 0;
+    }
+
+    .cart-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 7px;
+      font-weight: 900;
+    }
+
+    .remove-btn {
+      border: none;
+      background: transparent;
+      color: #dc2626;
+      font-size: 11px;
+      font-weight: 800;
+      margin-left: 5px;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--navy);
+      margin: 18px 0;
+    }
+
+    .full-btn {
+      width: 100%;
+      border: none;
+      border-radius: 11px;
+      background: var(--blue);
+      color: white;
+      padding: 13px;
+      font-weight: 900;
+    }
+
+    .full-btn:disabled {
+      background: #b6c5d3;
+      cursor: not-allowed;
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--navy);
+      border-radius: 10px;
+      padding: 11px 15px;
+      font-weight: 800;
+    }
+
+    .form-group {
+      margin-bottom: 13px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 5px;
+      color: var(--navy);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+    }
+
+    .form-group textarea {
+      min-height: 75px;
+      resize: vertical;
+    }
+
+    .notice {
+      background: #eff8ff;
+      border: 1px solid #d5eaff;
+      color: #24547a;
+      padding: 11px;
+      border-radius: 10px;
+      font-size: 11px;
+      margin: 12px 0;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 90px;
+      transform: translate(-50%, 20px);
+      background: #102a43;
+      color: white;
+      padding: 11px 17px;
+      border-radius: 12px;
+      z-index: 900;
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
+      max-width: 90%;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* Mobile navigation */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 150;
+      background: white;
+      border-top: 1px solid var(--border);
+      padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .mobile-nav button {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 10px;
+      display: grid;
+      justify-items: center;
+      gap: 2px;
+    }
+
+    .mobile-nav span {
+      font-size: 20px;
+    }
+
+    .mobile-nav button.active {
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    @media (max-width: 900px) {
+      .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .trust-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .header-main {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .logo {
+        flex: 1;
+      }
+
+      .search-box {
+        order: 3;
+        flex-basis: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        padding-bottom: 75px;
+      }
+
+      .container {
+        width: 94%;
+      }
+
+      .topbar {
+        font-size: 10px;
+      }
+
+      .header-main {
+        padding: 10px 0;
+      }
+
+      .logo {
+        min-width: 0;
+      }
+
+      .logo-icon {
+        width: 39px;
+        height: 39px;
+        font-size: 22px;
+      }
+
+      .logo-name {
+        font-size: 18px;
+      }
+
+      .header-actions {
+        gap: 6px;
+      }
+
+      .icon-btn {
+        min-width: 39px;
+        height: 39px;
+        font-size: 18px;
+      }
+
+      .nav-inner {
+        gap: 18px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding-top: 15px;
+      }
+
+      .hero-card {
+        grid-template-columns: 1fr .55fr;
+        min-height: 215px;
+        padding: 23px 5%;
+        border-radius: 19px;
+      }
+
+      .hero h1 {
+        font-size: 25px;
+      }
+
+      .hero p {
+        font-size: 11px;
+      }
+
+      .hero-art {
+        font-size: 75px;
+      }
+
+      .hero .primary-btn {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .trust-row {
+        gap: 8px;
+        margin: 12px 0 20px;
+      }
+
+      .trust-item {
+        padding: 11px 7px;
+        justify-content: flex-start;
+      }
+
+      .trust-icon {
+        font-size: 22px;
+      }
+
+      .trust-item strong {
+        font-size: 10px;
+      }
+
+      .trust-item small {
+        font-size: 9px;
+      }
+
+      .section {
+        padding: 12px 0 22px;
+        scroll-margin-top: 140px;
+      }
+
+      .section-title {
+        font-size: 21px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .product-info {
+        padding: 10px;
+      }
+
+      .product-name {
+        font-size: 12px;
+        min-height: 35px;
+      }
+
+      .product-description {
+        font-size: 10px;
+      }
+
+      .current-price {
+        font-size: 16px;
+      }
+
+      .old-price {
+        font-size: 10px;
+      }
+
+      .product-actions {
+        grid-template-columns: 1fr 36px;
+        gap: 5px;
+      }
+
+      .add-cart-btn {
+        font-size: 10px;
+        padding: 9px 4px;
+      }
+
+      .details-btn {
+        font-size: 15px;
+      }
+
+      .promo {
+        padding: 20px 15px;
+        gap: 10px;
+      }
+
+      .promo h2 {
+        font-size: 18px;
+      }
+
+      .promo p {
+        font-size: 11px;
+      }
+
+      .promo .primary-btn {
+        font-size: 10px;
+        padding: 10px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .mobile-nav {
+        display: grid;
+      }
+
+      .toast {
+        bottom: 85px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
+<body>
+
+  <div class="topbar">
+    🛍️ PandaGizmo BD — আপনার পছন্দের গ্যাজেট, এখন অনলাইনে!
+  </div>
+
+  <header class="header">
+    <div class="container">
+      <div class="header-main">
+
+        <a class="logo" href="#" aria-label="PandaGizmo Home">
+          <div class="logo-icon">🐼</div>
+          <div>
+            <div class="logo-name">Panda<span>Gizmo</span></div>
+            <div class="logo-sub">SMART GADGETS STORE</div>
+          </div>
+        </a>
+
+        <form class="search-box" id="searchForm">
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="আপনার পছন্দের গ্যাজেট খুঁজুন..."
+            aria-label="প্রোডাক্ট সার্চ">
+
+          <button type="submit" aria-label="Search">⌕</button>
+        </form>
+
+        <div class="header-actions">
+          <button class="icon-btn" id="wishlistHeaderBtn"
+            title="Wishlist" aria-label="Wishlist">♡</button>
+
+          <button class="icon-btn" id="openCartBtn"
+            title="Shopping Cart" aria-label="Shopping Cart">
+            🛒
+            <span class="cart-count" id="cartCount">0</span>
+          </button>
+        </div>
+
+      </div>
+
+      <nav class="nav">
+        <div class="nav-inner">
+          <a href="#home">হোম</a>
+          <a href="#categories">ক্যাটাগরি</a>
+          <a href="#products">সব প্রোডাক্ট</a>
+          <a href="#offers">অফার</a>
+          <a href="#footer">যোগাযোগ</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero container" id="home">
+      <div class="hero-card">
+        <div>
+          <span class="hero-label">WELCOME TO PANDAGIZMO BD</span>
+
+          <h1>আপনার স্মার্ট লাইফের স্মার্ট গ্যাজেট</h1>
+
+          <p>
+            প্রয়োজনীয় গ্যাজেট ও মোবাইল এক্সেসরিজ খুঁজুন এক জায়গায়।
+            পছন্দের প্রোডাক্ট বেছে নিয়ে সহজেই অর্ডার করুন।
+          </p>
+
+          <a href="#products" class="primary-btn">
+            প্রোডাক্ট দেখুন <span>→</span>
+          </a>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">🎧📱</div>
+      </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="container">
+      <div class="trust-row">
+        <div class="trust-item">
+          <span class="trust-icon">📦</span>
+          <div>
+            <strong>সহজ অর্ডার</strong>
+            <small>WhatsApp-এ অর্ডার</small>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">🎧</span>
+          <div>
+            <strong>গ্যাজেট কালেকশন</strong>
+            <small>বিভিন্ন ধরনের পণ্য</small>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">💬</span>
+          <div>
+            <strong>সরাসরি যোগাযোগ</strong>
+            <small>আমাদের সঙ্গে কথা বলুন</small>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">🛒</span>
+          <div>
+            <strong>সহজ শপিং</strong>
+            <small>কার্টে পণ্য যোগ করুন</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section container" id="categories">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">ক্যাটাগরি অনুযায়ী কিনুন</h2>
+          <p class="section-subtitle">আপনার প্রয়োজনের প্রোডাক্ট খুঁজে নিন</p>
+        </div>
+      </div>
+
+      <div class="category-list" id="categoryList">
+        <button class="category-chip active" data-category="all">
+          সব প্রোডাক্ট
+        </button>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section container" id="products">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title" id="productSectionTitle">
+            আমাদের প্রোডাক্ট
+          </h2>
+
+          <p class="section-subtitle" id="productCountText">
+            প্রোডাক্ট লোড হচ্ছে...
+          </p>
+        </div>
+
+        <button class="text-btn" id="refreshBtn">↻ রিফ্রেশ</button>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <div class="loading-state">
+          <div class="state-icon">⏳</div>
+          <p>প্রোডাক্ট লোড হচ্ছে...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offers -->
+    <section class="container" id="offers">
+      <div class="promo">
+        <div>
+          <h2>পছন্দের গ্যাজেট বেছে নিন! 🎁</h2>
+          <p>
+            প্রোডাক্টের বর্তমান দাম ও অফার দেখতে আমাদের কালেকশন ঘুরে দেখুন।
+          </p>
+        </div>
+
+        <a href="#products" class="primary-btn">এখনই দেখুন →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <h3>🐼 PandaGizmo BD</h3>
+          <p>
+            আপনার পছন্দের গ্যাজেট ও মোবাইল এক্সেসরিজ অনলাইনে খুঁজে নিন।
+            প্রোডাক্ট নির্বাচন করে WhatsApp-এ অর্ডার করতে পারবেন।
+          </p>
+        </div>
+
+        <div>
+          <h3>দ্রুত লিংক</h3>
+          <a href="#home">হোম</a>
+          <a href="#categories">ক্যাটাগরি</a>
+          <a href="#products">সব প্রোডাক্ট</a>
+          <a href="#offers">অফার</a>
+        </div>
+
+        <div>
+          <h3>যোগাযোগ</h3>
+          <a href="https://wa.me/8801331199256" target="_blank"
+            rel="noopener noreferrer">WhatsApp: 01331199256</a>
+          <a href="https://www.facebook.com/" target="_blank"
+            rel="noopener noreferrer">Facebook Page</a>
+          <p>Online Store — Bangladesh</p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        © <span id="currentYear"></span> PandaGizmo BD. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Product Details Modal -->
+  <div class="modal" id="productModal"
+    role="dialog" aria-modal="true" aria-label="Product Details">
+
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2>প্রোডাক্টের বিস্তারিত</h2>
+        <button class="close-btn" data-close="productModal"
+          aria-label="Close">×</button>
+      </div>
+
+      <div class="modal-content" id="productModalContent"></div>
+    </div>
+  </div>
+
+  <!-- Cart Modal -->
+  <div class="modal" id="cartModal"
+    role="dialog" aria-modal="true" aria-label="Shopping Cart">
+
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2>🛒 আপনার শপিং কার্ট</h2>
+        <button class="close-btn" data-close="cartModal"
+          aria-label="Close">×</button>
+      </div>
+
+      <div class="modal-content">
+        <div class="cart-list" id="cartList"></div>
+
+        <div class="cart-total">
+          <span>সর্বমোট</span>
+          <span id="cartTotal">৳০</span>
+        </div>
+
+        <button class="full-btn" id="checkoutBtn">
+          অর্ডার করতে এগিয়ে যান →
+        </button>
+
+        <p class="notice">
+          ডেলিভারি চার্জ এখানে যোগ করা হয়নি। অর্ডার নিশ্চিত করার আগে
+          বিক্রেতার সঙ্গে ডেলিভারি চার্জ ও পণ্যের প্রাপ্যতা যাচাই করুন।
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="modal" id="checkoutModal"
+    role="dialog" aria-modal="true" aria-label="Checkout">
+
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2>আপনার অর্ডারের তথ্য</h2>
+        <button class="close-btn" data-close="checkoutModal"
+          aria-label="Close">×</button>
+      </div>
+
+      <div class="modal-content">
+        <form id="checkoutForm">
+
+          <div class="form-group">
+            <label for="customerName">আপনার নাম *</label>
+            <input id="customerName" name="name"
+              type="text" autocomplete="name" required
+              placeholder="সম্পূর্ণ নাম লিখুন">
+          </div>
+
+          <div class="form-group">
+            <label for="customerPhone">মোবাইল নম্বর *</label>
+            <input id="customerPhone" name="phone"
+              type="tel" inputmode="tel" autocomplete="tel"
+              required pattern="[0-9+() -]{8,20}"
+              placeholder="01XXXXXXXXX">
+          </div>
+
+          <div class="form-group">
+            <label for="customerAddress">ডেলিভারি ঠিকানা *</label>
+            <textarea id="customerAddress" name="address"
+              autocomplete="street-address" required
+              placeholder="বাসা, এলাকা, উপজেলা ও জেলা"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="customerNote">অতিরিক্ত তথ্য (ঐচ্ছিক)</label>
+            <textarea id="customerNote" name="note"
+              placeholder="প্রয়োজন হলে লিখুন"></textarea>
+          </div>
+
+          <div class="notice">
+            আপনার দেওয়া তথ্য WhatsApp-এ অর্ডার মেসেজ হিসেবে পাঠানো হবে।
+            এই পেজ নিজে থেকে ডেটাবেসে অর্ডার সংরক্ষণ করে না।
+          </div>
+
+          <button class="full-btn" type="submit">
+            WhatsApp-এ অর্ডার পাঠান
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Mobile Navigation -->
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <button class="active" data-scroll="home">
+      <span>⌂</span>হোম
+    </button>
+
+    <button data-scroll="categories">
+      <span>▦</span>ক্যাটাগরি
+    </button>
+
+    <button data-scroll="products">
+      <span>⌕</span>প্রোডাক্ট
+    </button>
+
+    <button id="mobileCartBtn">
+      <span>🛒</span>কার্ট
+    </button>
+  </nav>
+
+  <script>
+    "use strict";
+
+    /* ========================================
+       1. CONFIGURATION
+    ======================================== */
+
+    const API_BASE =
+      "https://pandashop-bd-api-2026.pandagizmofficial.workers.dev";
+
+    const PRODUCTS_API = `${API_BASE}/api/products`;
+
+    // WhatsApp number in international format without + sign.
+    const WHATSAPP_NUMBER = "8801331199256";
+
+    const STORAGE_CART = "pand gizmo_cart_v1".replace(" ", "");
+    const STORAGE_WISHLIST = "pand gizmo_wishlist_v1".replace(" ", "");
+
+    /* ========================================
+       2. APPLICATION STATE
+    ======================================== */
+
+    let products = [];
+    let filteredProducts = [];
+    let activeCategory = "all";
+    let searchQuery = "";
+    let wishlistOnly = false;
+    let toastTimer;
+
+    let cart = readStorage(STORAGE_CART, []);
+    let wishlist = readStorage(STORAGE_WISHLIST, []);
+
+    const $ = (selector) => document.querySelector(selector);
+
+    const productGrid = $("#productGrid");
+    const categoryList = $("#categoryList");
+    const searchInput = $("#searchInput");
+    const cartCount = $("#cartCount");
+
+    /* ========================================
+       3. HELPERS
+    ======================================== */
+
+    function readStorage(key, fallback) {
+      try {
+        const value = JSON.parse(localStorage.getItem(key));
+        return value ?? fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function saveStorage(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (error) {
+        console.warn("Local storage unavailable:", error);
+      }
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function money(value) {
+      const amount = Number(value);
+
+      if (!Number.isFinite(amount)) {
+        return "দাম জানতে যোগাযোগ করুন";
+      }
+
+      return "৳" + new Intl.NumberFormat("en-BD", {
+        maximumFractionDigits: 2
+      }).format(amount);
+    }
+
+    function normalizeProduct(product, index) {
+      const item = product && typeof product === "object"
+        ? product : {};
+
+      return {
+        ...item,
+        id: String(item.id ?? item.product_id ?? index + 1),
+        name: String(item.name ?? item.title ?? "Unnamed Product"),
+        description: String(item.description ?? item.details ?? ""),
+        price: item.price ?? item.sale_price ?? 0,
+        old_price: item.old_price ?? item.regular_price ?? null,
+        image_url: item.image_url ?? item.image ?? item.photo ?? "",
+        category: String(item.category ?? "অন্যান্য"),
+        stock: item.stock ?? 0,
+        active: item.active
+      };
+    }
+
+    function getImageURL(url) {
+      if (typeof url !== "string") return "";
+
+      const value = url.trim();
+
+      if (!value) return "";
+
+      try {
+        const parsed = new URL(value, window.location.href);
+
+        if (!["https:", "http:"].includes(parsed.protocol)) {
+          return "";
+        }
+
+        return parsed.href;
+      } catch {
+        return "";
+      }
+    }
+
+    function getProductImageHTML(product, className = "product-image") {
+      const url = getImageURL(product.image_url);
+
+      if (!url) {
+        return `<div class="product-placeholder" aria-label="No image">📦</div>`;
+      }
+
+      return `
+        <img
+          class="${className}"
+          src="${escapeHTML(url)}"
+          alt="${escapeHTML(product.name)}"
+          loading="lazy"
+          onerror="this.replaceWith(Object.assign(document.createElement('div'), {
+            className: 'product-placeholder',
+            textContent: '📦'
+          }))">
+      `;
+    }
+
+    function isInStock(product) {
+      const stock = Number(product.stock);
+
+      // Unknown stock is not automatically treated as sold out.
+      if (product.stock === null || product.stock === undefined ||
+          product.stock === "") {
+        return true;
+      }
+
+      return Number.isFinite(stock) && stock > 0;
+    }
+
+    function formatStock(product) {
+      if (!isInStock(product)) {
+        return `<div class="stock-label out">স্টক নেই</div>`;
+      }
+
+      const stock = Number(product.stock);
+
+      if (Number.isFinite(stock) && stock > 0) {
+        return `<div class="stock-label">✓ স্টকে আছে</div>`;
+      }
+
+      return `<div class="stock-label">স্টক জানতে যোগাযোগ করুন</div>`;
+    }
+
+    function showToast(message) {
+      const toast = $("#toast");
+
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2600);
+    }
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+
+      if (modal) {
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+
+      if (modal) {
+        modal.classList.remove("open");
+      }
+
+      if (!document.querySelector(".modal.open")) {
+        document.body.style.overflow = "";
+      }
+    }
+
+    /* ========================================
+       4. API: LOAD PRODUCTS FROM CLOUDFLARE
+    ======================================== */
+
+    async function loadProducts() {
+      productGrid.innerHTML = `
+        <div class="loading-state">
+          <div class="state-icon">⏳</div>
+          <p>প্রোডাক্ট লোড হচ্ছে...</p>
+        </div>
+      `;
+
+      $("#productCountText").textContent = "ডেটাবেস থেকে তথ্য আনা হচ্ছে...";
+
+      $("#refreshBtn").disabled = true;
+
+      try {
+        const response = await fetch(PRODUCTS_API, {
+          method: "GET",
+          headers: {
+            "Accept": "application/json"
+          },
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          throw new Error(`API request failed: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        // Supports either an array or common API response wrappers.
+        let list;
+
+        if (Array.isArray(result)) {
+          list = result;
+        } else if (Array.isArray(result.products)) {
+          list = result.products;
+        } else if (Array.isArray(result.data)) {
+          list = result.data;
+        } else if (Array.isArray(result.results)) {
+          list = result.results;
+        } else {
+          throw new Error("Unexpected products API response format");
+        }
+
+        products = list
+          .map(normalizeProduct)
+          .filter(product => product.active !== false &&
+            product.active !== 0 &&
+            product.active !== "0");
+
+        buildCategories();
+        applyFilters();
+
+      } catch (error) {
+        console.error("PandaGizmo API error:", error);
+
+        productGrid.innerHTML = `
+          <div class="error-state">
+            <div class="state-icon">⚠️</div>
+            <h3>প্রোডাক্ট লোড করা যায়নি</h3>
+            <p style="margin:10px 0">
+              ইন্টারনেট, API অথবা CORS সেটিংস পরীক্ষা করুন।
+            </p>
+            <button class="primary-btn" id="retryProductsBtn">
+              আবার চেষ্টা করুন
+            </button>
+          </div>
+        `;
+
+        $("#productCountText").textContent = "প্রোডাক্ট পাওয়া যায়নি";
+
+        $("#retryProductsBtn")?.addEventListener("click", loadProducts);
+
+      } finally {
+        $("#refreshBtn").disabled = false;
+      }
+    }
+
+    /* ========================================
+       5. BUILD CATEGORIES FROM API PRODUCTS
+    ======================================== */
+
+    function buildCategories() {
+      const previousCategory = activeCategory;
+
+      const categories = [...new Set(
+        products
+          .map(product => product.category.trim())
+          .filter(Boolean)
+      )];
+
+      categoryList.innerHTML = `
+        <button class="category-chip ${previousCategory === "all" ? "active" : ""}"
+          data-category="all">
+          সব প্রোডাক্ট
+        </button>
+        ${categories.map(category => `
+          <button
+            class="category-chip ${previousCategory === category ? "active" : ""}"
+            data-category="${escapeHTML(category)}">
+            ${escapeHTML(category)}
+          </button>
+        `).join("")}
+      `;
+
+      if (previousCategory !== "all" &&
+          !categories.includes(previousCategory)) {
+        activeCategory = "all";
+      }
+
+      categoryList.querySelectorAll("[data-category]").forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.category === activeCategory
+        );
+      });
+    }
+
+    /* ========================================
+       6. SEARCH AND FILTER
+    ======================================== */
+
+    function applyFilters() {
+      const query = searchQuery.trim().toLocaleLowerCase();
+
+      filteredProducts = products.filter(product => {
+        const categoryMatch =
+          activeCategory === "all" ||
+          product.category === activeCategory;
+
+        const searchText = [
+          product.name,
+          product.description,
+          product.category
+        ].join(" ").toLocaleLowerCase();
+
+        const searchMatch = !query || searchText.includes(query);
+
+        const wishlistMatch =
+          !wishlistOnly || wishlist.includes(product.id);
+
+        return categoryMatch && searchMatch && wishlistMatch;
+      });
+
+      renderProducts(filteredProducts);
+
+      const label = wishlistOnly
+        ? "পছন্দের প্রোডাক্ট"
+        : activeCategory === "all"
+          ? "আমাদের প্রোডাক্ট"
+          : activeCategory;
+
+      $("#productSectionTitle").textContent = label;
+
+      $("#productCountText").textContent =
+        `${filteredProducts.length}টি প্রোডাক্ট পাওয়া গেছে`;
+    }
+
+    /* ========================================
+       7. RENDER PRODUCT CARDS
+    ======================================== */
+
+    function renderProducts(list) {
+      if (!list.length) {
+        productGrid.innerHTML = `
+          <div class="empty-state">
+            <div class="state-icon">🔎</div>
+            <h3>কোনো প্রোডাক্ট পাওয়া যায়নি</h3>
+            <p style="margin:8px 0 15px">
+              অন্য নাম লিখে অথবা অন্য ক্যাটাগরি বেছে দেখুন।
+            </p>
+            <button class="secondary-btn" id="resetFiltersBtn">
+              সব প্রোডাক্ট দেখুন
+            </button>
+          </div>
+        `;
+
+        $("#resetFiltersBtn")?.addEventListener("click", () => {
+          activeCategory = "all";
+          searchQuery = "";
+          wishlistOnly = false;
+          searchInput.value = "";
+          buildCategories();
+          applyFilters();
+        });
+
+        return;
+      }
+
+      productGrid.innerHTML = list.map(product => {
+        const price = Number(product.price);
+        const oldPrice = Number(product.old_price);
+
+        const hasOldPrice =
+          product.old_price !== null &&
+          product.old_price !== undefined &&
+          product.old_price !== "" &&
+          Number.isFinite(oldPrice) &&
+          Number.isFinite(price) &&
+          oldPrice > price &&
+          oldPrice > 0;
+
+        const discount = hasOldPrice
+          ? Math.round((oldPrice - price) / oldPrice * 100)
+          : 0;
+
+        const liked = wishlist.includes(product.id);
+        const stock = isInStock(product);
+
+        return `
+          <article class="product-card" data-product-id="${escapeHTML(product.id)}">
+
+            <div class="product-image-wrap"
+              data-details="${escapeHTML(product.id)}">
+
+              ${hasOldPrice
+                ? `<span class="product-badge">-${discount}%</span>`
+                : ""}
+
+              ${getProductImageHTML(product)}
+
+              <button
+                class="wishlist-btn ${liked ? "liked" : ""}"
+                data-wishlist="${escapeHTML(product.id)}"
+                aria-label="পছন্দের তালিকায় যোগ করুন">
+                ${liked ? "♥" : "♡"}
+              </button>
+            </div>
+
+            <div class="product-info">
+              <div class="product-category">
+                ${escapeHTML(product.category)}
+              </div>
+
+              <h3 class="product-name"
+                data-details="${escapeHTML(product.id)}">
+                ${escapeHTML(product.name)}
+              </h3>
+
+              <p class="product-description">
+                ${escapeHTML(product.description || "বিস্তারিত জানতে প্রোডাক্টটি দেখুন।")}
+              </p>
+
+              <div class="price-row">
+                <span class="current-price">${money(product.price)}</span>
+
+                ${hasOldPrice
+                  ? `<span class="old-price">${money(oldPrice)}</span>`
+                  : ""}
+              </div>
+
+              <div class="product-actions">
+                <button
+                  class="add-cart-btn"
+                  data-add="${escapeHTML(product.id)}"
+                  ${stock ? "" : "disabled"}>
+                  ${stock ? "🛒 কার্টে যোগ" : "স্টক নেই"}
+                </button>
+
+                <button
+                  class="details-btn"
+                  data-details="${escapeHTML(product.id)}"
+                  aria-label="বিস্তারিত দেখুন">
+                  ↗
+                </button>
+              </div>
+
+              ${formatStock(product)}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    /* ========================================
+       8. PRODUCT DETAILS
+    ======================================== */
+
+    function findProduct(id) {
+      return products.find(product => product.id === String(id));
+    }
+
+    function showProductDetails(id) {
+      const product = findProduct(id);
+
+      if (!product) return;
+
+      const price = Number(product.price);
+      const oldPrice = Number(product.old_price);
+
+      const hasOldPrice =
+        product.old_price !== null &&
+        product.old_price !== undefined &&
+        product.old_price !== "" &&
+        Number.isFinite(oldPrice) &&
+        Number.isFinite(price) &&
+        oldPrice > price &&
+        oldPrice > 0;
+
+      $("#productModalContent").innerHTML = `
+        ${getProductImageHTML(product, "detail-image")}
+
+        <div class="product-category">
+          ${escapeHTML(product.category)}
+        </div>
+
+        <h3 class="detail-name">${escapeHTML(product.name)}</h3>
+
+        <div class="price-row">
+          <span class="current-price">${money(product.price)}</span>
+          ${hasOldPrice
+            ? `<span class="old-price">${money(oldPrice)}</span>`
+            : ""}
+        </div>
+
+        <p class="detail-description">
+          ${escapeHTML(product.description || "এই প্রোডাক্ট সম্পর্কে আরও জানতে আমাদের সঙ্গে যোগাযোগ করুন।")}
+        </p>
+
+        ${formatStock(product)}
+
+        <button class="full-btn"
+          id="detailAddCartBtn"
+          style="margin-top:18px"
+          ${isInStock(product) ? "" : "disabled"}>
+          ${isInStock(product) ? "🛒 কার্টে যোগ করুন" : "স্টক নেই"}
+        </button>
+
+        <button class="secondary-btn"
+          id="detailWhatsAppBtn"
+          style="width:100%;margin-top:9px">
+          WhatsApp-এ যোগাযোগ করুন
+        </button>
+      `;
+
+      $("#detailAddCartBtn")?.addEventListener("click", () => {
+        addToCart(product.id);
+        closeModal("productModal");
+      });
+
+      $("#detailWhatsAppBtn")?.addEventListener("click", () => {
+        const message =
+          `আসসালামু আলাইকুম, ${product.name} প্রোডাক্টটি সম্পর্কে জানতে চাই।`;
+
+        openWhatsApp(message);
+      });
+
+      openModal("productModal");
+    }
+
+    /* ========================================
+       9. WISHLIST
+    ======================================== */
+
+    function toggleWishlist(id) {
+      id = String(id);
+
+      if (wishlist.includes(id)) {
+        wishlist = wishlist.filter(item => item !== id);
+        showToast("পছন্দের তালিকা থেকে সরানো হয়েছে");
+      } else {
+        wishlist.push(id);
+        showToast("পছন্দের তালিকায় যোগ হয়েছে ❤️");
+      }
+
+      saveStorage(STORAGE_WISHLIST, wishlist);
+      applyFilters();
+    }
+
+    /* ========================================
+       10. CART
+    ======================================== */
+
+    function saveCart() {
+      saveStorage(STORAGE_CART, cart);
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce(
+        (sum, item) => sum + Number(item.quantity || 0),
+        0
+      );
+
+      cartCount.textContent = count > 99 ? "99+" : count;
+    }
+
+    function addToCart(id) {
+      const product = findProduct(id);
+
+      if (!product) {
+        showToast("প্রোডাক্ট পাওয়া যায়নি");
+        return;
+      }
+
+      if (!isInStock(product)) {
+        showToast("দুঃখিত, প্রোডাক্টটি স্টকে নেই");
+        return;
+      }
+
+      const existing = cart.find(item => item.id === product.id);
+
+      if (existing) {
+        const stock = Number(product.stock);
+
+        if (Number.isFinite(stock) && stock > 0 &&
+            existing.quantity >= stock) {
+          showToast("স্টকের চেয়ে বেশি যোগ করা যাবে না");
+          return;
+        }
+
+        existing.quantity += 1;
+
+      } else {
+        cart.push({
+          id: product.id,
+          quantity: 1
+        });
+      }
+
+      saveCart();
+      showToast("কার্টে প্রোডাক্ট যোগ হয়েছে 🛒");
+    }
+
+    function changeQuantity(id, amount) {
+      const item = cart.find(item => item.id === String(id));
+
+      if (!item) return;
+
+      const product = findProduct(item.id);
+
+      if (!product) {
+        cart = cart.filter(cartItem => cartItem.id !== item.id);
+        saveCart();
+        renderCart();
+        return;
+      }
+
+      const newQuantity = item.quantity + amount;
+      const stock = Number(product.stock);
+
+      if (newQuantity <= 0) {
+        cart = cart.filter(cartItem => cartItem.id !== item.id);
+      } else {
+        if (Number.isFinite(stock) && stock > 0 &&
+            newQuantity > stock) {
+          showToast("স্টকের চেয়ে বেশি যোগ করা যাবে না");
+          return;
+        }
+
+        item.quantity = newQuantity;
+      }
+
+      saveCart();
+      renderCart();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== String(id));
+      saveCart();
+      renderCart();
+      showToast("কার্ট থেকে প্রোডাক্ট সরানো হয়েছে");
+    }
+
+    function getCartDetails() {
+      return cart.map(item => {
+        const product = findProduct(item.id);
+
+        if (!product) return null;
+
+        return {
+          product,
+          quantity: Number(item.quantity) || 1,
+          subtotal: Number(product.price) * (Number(item.quantity) || 1)
+        };
+      }).filter(Boolean);
+    }
+
+    function getCartTotal() {
+      return getCartDetails().reduce(
+        (total, item) => total + item.subtotal,
+        0
+      );
+    }
+
+    function renderCart() {
+      const details = getCartDetails();
+      const cartList = $("#cartList");
+
+      if (!details.length) {
+        cartList.innerHTML = `
+          <div class="empty-state">
+            <div class="state-icon">🛒</div>
+            <h3>আপনার কার্ট খালি</h3>
+            <p>পছন্দের প্রোডাক্ট কার্টে যোগ করুন।</p>
+          </div>
+        `;
+      } else {
+        cartList.innerHTML = details.map(({ product, quantity, subtotal }) => `
+          <div class="cart-item">
+            ${getProductImageHTML(product, "cart-thumb")}
+
+            <div>
+              <div class="cart-item-name">
+                ${escapeHTML(product.name)}
+              </div>
+
+              <div class="cart-item-price">
+                ${money(subtotal)}
+              </div>
+
+              <div class="cart-controls">
+                <button class="qty-btn"
+                  data-qty="${escapeHTML(product.id)}"
+                  data-change="-1"
+                  aria-label="পরিমাণ কমান">−</button>
+
+                <strong>${quantity}</strong>
+
+                <button class="qty-btn"
+                  data-qty="${escapeHTML(product.id)}"
+                  data-change="1"
+                  aria-label="পরিমাণ বাড়ান">+</button>
+
+                <button class="remove-btn"
+                  data-remove="${escapeHTML(product.id)}">
+                  সরান
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      $("#cartTotal").textContent = money(getCartTotal());
+      $("#checkoutBtn").disabled = details.length === 0;
+    }
+
+    /* ========================================
+       11. WHATSAPP CHECKOUT
+    ======================================== */
+
+    function openWhatsApp(message) {
+      const url =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function beginCheckout() {
+      if (!getCartDetails().length) {
+        showToast("আগে কার্টে প্রোডাক্ট যোগ করুন");
+        return;
+      }
+
+      closeModal("cartModal");
+      openModal("checkoutModal");
+    }
+
+    function submitOrder(event) {
+      event.preventDefault();
+
+      const details = getCartDetails();
+
+      if (!details.length) {
+        showToast("আপনার কার্ট খালি");
+        closeModal("checkoutModal");
+        return;
+      }
+
+      const name = $("#customerName").value.trim();
+      const phone = $("#customerPhone").value.trim();
+      const address = $("#customerAddress").value.trim();
+      const note = $("#customerNote").value.trim();
+
+      if (!name || !phone || !address) {
+        showToast("নাম, ফোন ও ঠিকানা পূরণ করুন");
+        return;
+      }
+
+      let message = [
+        "🛒 *নতুন অর্ডার — PandaGizmo BD*",
+        "",
+        `👤 নাম: ${name}`,
+        `📱 ফোন: ${phone}`,
+        `📍 ঠিকানা: ${address}`,
+        "",
+        "*প্রোডাক্টের তালিকা:*"
+      ];
+
+      details.forEach(({ product, quantity, subtotal }, index) => {
+        message.push(
+          "",
+          `${index + 1}. ${product.name}`,
+          `   পরিমাণ: ${quantity}`,
+          `   একক দাম: ${money(product.price)}`,
+          `   মোট: ${money(subtotal)}`
+        );
+      });
+
+      message.push(
+        "",
+        `💰 *প্রোডাক্টের মোট দাম: ${money(getCartTotal())}*`,
+        "🚚 ডেলিভারি চার্জ: আলোচনা সাপেক্ষে",
+        "",
+        `📝 অতিরিক্ত তথ্য: ${note || "নেই"}`,
+        "",
+        "অনুগ্রহ করে অর্ডারটি নিশ্চিত করুন।"
+      );
+
+      /*
+        This opens WhatsApp with a prefilled message.
+        It does NOT save the order to the database.
+      */
+      openWhatsApp(message.join("\n"));
+
+      /*
+        Do not clear the cart automatically. The user may return
+        before sending the message. They can clear it manually later.
+      */
+    }
+
+    /* ========================================
+       12. EVENT LISTENERS
+    ======================================== */
+
+    categoryList.addEventListener("click", event => {
+      const button = event.target.closest("[data-category]");
+
+      if (!button) return;
+
+      activeCategory = button.dataset.category;
+      wishlistOnly = false;
+
+      categoryList.querySelectorAll("[data-category]").forEach(item => {
+        item.classList.toggle("active", item === button);
+      });
+
+      applyFilters();
+    });
+
+    productGrid.addEventListener("click", event => {
+      const addButton = event.target.closest("[data-add]");
+      const wishlistButton = event.target.closest("[data-wishlist]");
+      const detailsButton = event.target.closest("[data-details]");
+
+      if (addButton) {
+        addToCart(addButton.dataset.add);
+        return;
+      }
+
+      if (wishlistButton) {
+        event.stopPropagation();
+        toggleWishlist(wishlistButton.dataset.wishlist);
+        return;
+      }
+
+      if (detailsButton) {
+        showProductDetails(detailsButton.dataset.details);
+      }
+    });
+
+    $("#searchForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      searchQuery = searchInput.value;
+      wishlistOnly = false;
+
+      applyFilters();
+
+      $("#products").scrollIntoView({ behavior: "smooth" });
+    });
+
+    searchInput.addEventListener("input", () => {
+      searchQuery = searchInput.value;
+      wishlistOnly = false;
+      applyFilters();
+    });
+
+    $("#refreshBtn").addEventListener("click", loadProducts);
+
+    $("#openCartBtn").addEventListener("click", () => {
+      renderCart();
+      openModal("cartModal");
+    });
+
+    $("#mobileCartBtn").addEventListener("click", () => {
+      renderCart();
+      openModal("cartModal");
+    });
+
+    $("#wishlistHeaderBtn").addEventListener("click", () => {
+      wishlistOnly = !wishlistOnly;
+      activeCategory = "all";
+      searchQuery = "";
+      searchInput.value = "";
+
+      buildCategories();
+      applyFilters();
+
+      $("#products").scrollIntoView({ behavior: "smooth" });
+
+      showToast(
+        wishlistOnly
+          ? "আপনার পছন্দের প্রোডাক্ট"
+          : "সব প্রোডাক্ট"
+      );
+    });
+
+    $("#cartList").addEventListener("click", event => {
+      const qtyButton = event.target.closest("[data-qty]");
+      const removeButton = event.target.closest("[data-remove]");
+
+      if (qtyButton) {
+        changeQuantity(
+          qtyButton.dataset.qty,
+          Number(qtyButton.dataset.change)
+        );
+      }
+
+      if (removeButton) {
+        removeFromCart(removeButton.dataset.remove);
+      }
+    });
+
+    $("#checkoutBtn").addEventListener("click", beginCheckout);
+
+    $("#checkoutForm").addEventListener("submit", submitOrder);
+
+    document.querySelectorAll("[data-close]").forEach(button => {
+      button.addEventListener("click", () => {
+        closeModal(button.dataset.close);
+      });
+    });
+
+    document.querySelectorAll(".modal").forEach(modal => {
+      modal.addEventListener("click", event => {
+        if (event.target === modal) {
+          closeModal(modal.id);
+        }
+      });
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        document.querySelectorAll(".modal.open").forEach(modal => {
+          closeModal(modal.id);
+        });
+      }
+    });
+
+    document.querySelectorAll("[data-scroll]").forEach(button => {
+      button.addEventListener("click", () => {
+        const target = document.getElementById(button.dataset.scroll);
+
+        target?.scrollIntoView({ behavior: "smooth" });
+
+        document.querySelectorAll(".mobile-nav button").forEach(item => {
+          item.classList.toggle("active", item === button);
+        });
+      });
+    });
+
+    /* ========================================
+       13. INITIALIZE
+    ======================================== */
+
+    $("#currentYear").textContent = new Date().getFullYear();
+
+    updateCartCount();
+    renderCart();
+    loadProducts();
+
+  </script>
+
+</body>
+</html>
