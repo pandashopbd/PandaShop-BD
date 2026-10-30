@@ -1,4 +1,4 @@
-.md
+AGENTS.md
 
 ## Overview
 
